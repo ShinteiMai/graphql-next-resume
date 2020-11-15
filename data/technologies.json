@@ -1,0 +1,53 @@
+{
+  "technologies": [
+    {
+      "id": 0,
+      "title": "React",
+      "description": "",
+      "thumbnail": "/images/react.png"
+    },
+    {
+      "id": 1,
+      "title": "TypeScript",
+      "description": "",
+      "thumbnail": "/images/typescript.png"
+    },
+
+    {
+      "id": 2,
+      "title": "GraphQL",
+      "description": "",
+      "thumbnail": "/images/graphql.png"
+    },
+    {
+      "id": 3,
+      "title": "NestJS",
+      "description": "",
+      "thumbnail": "/images/nestjs.png"
+    },
+    {
+      "id": 4,
+      "title": "Express",
+      "description": "",
+      "thumbnail": "/images/express.png"
+    },
+    {
+      "id": 5,
+      "title": "PostgreSQL",
+      "description": "",
+      "thumbnail": "/images/postgresql.png"
+    },
+    {
+      "id": 6,
+      "title": "Tailwind CSS",
+      "description": "",
+      "thumbnail": "/images/tailwind.png"
+    },
+    {
+      "id": 7,
+      "title": "Chakra UI",
+      "description": "",
+      "thumbnail": "/images/chakraui.png"
+    }
+  ]
+}

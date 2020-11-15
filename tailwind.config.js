@@ -17,7 +17,7 @@ module.exports = {
     },
     extend: {
       fontFamily: {
-        sans: ["Montserrat", "sans-serif"],
+        sans: ["Poppins", "sans-serif"],
       },
       letterSpacing: {
         xl: "0.3em",
@@ -43,7 +43,13 @@ module.exports = {
         166: "39rem",
         178: "42rem",
       },
-      colors: {},
+      colors: {
+        primary: "#64FFDA",
+        secondary: "#0FF6BF",
+        "accents-0": "#323030",
+        "accents-1": "#CACACA",
+        "accents-2": "#E9E9E9",
+      },
     },
   },
 };
