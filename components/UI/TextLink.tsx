@@ -5,6 +5,7 @@ import { TComponent } from "..";
 
 interface Props extends TComponent {
   href: string;
+  newTab?: boolean;
 }
 
 const TextLink = ({
@@ -12,15 +13,27 @@ const TextLink = ({
   children,
   "data-testid": testId,
   className,
+  newTab,
 }: Props) => {
   return (
-    <Link href={href}>
-      <span
-        data-testid={testId || "text-link"}
-        className={clsx("no-underline cursor-pointer", className)}
-      >
-        {children}
-      </span>
+    <Link href={href} passHref={newTab}>
+      {newTab ? (
+        <a
+          data-testid={testId || "text-link-new-tab"}
+          className={clsx("no-underline cursor-pointer", className)}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          {children}
+        </a>
+      ) : (
+        <span
+          data-testid={testId || "text-link"}
+          className={clsx("no-underline cursor-pointer", className)}
+        >
+          {children}
+        </span>
+      )}
     </Link>
   );
 };

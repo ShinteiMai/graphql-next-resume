@@ -11,9 +11,9 @@ import Social from "./Social";
 
 interface Props extends TComponent {}
 
-const Sidebar = ({ className }: Props) => {
+const Sidebar = ({ className, "data-testid": testId }: Props) => {
   return (
-    <Container className={className}>
+    <Container data-testid={testId || "sidebar"} className={className}>
       <Avatar
         className="mb-3"
         src="https://images.unsplash.com/photo-1542103749-8ef59b94f47e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80"

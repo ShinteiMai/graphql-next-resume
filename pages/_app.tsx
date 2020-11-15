@@ -1,13 +1,83 @@
 import React from "react";
 import App from "next/app";
 import "../index.css";
+import Layout from "../components/UI/Layout";
+import { animated, useTransition, UseTransitionResult } from "react-spring";
+import { NextComponentType, NextPageContext } from "next";
+
+interface Props {
+  children: ({
+    transitions,
+  }: {
+    transitions: UseTransitionResult<any, any>[];
+  }) => JSX.Element;
+  items: {
+    id: string;
+    Component: NextComponentType<NextPageContext, any, {}>;
+    pageProps: any;
+  }[];
+}
+
+const PageContainer = ({ children, items }: Props) => {
+  const transitions = useTransition(items, (p) => p.id, {
+    from: { opacity: 0 },
+    enter: { opacity: 1 },
+    leave: { opacity: 0 },
+    config: {
+      duration: 750,
+    },
+  });
+  return children({
+    transitions,
+  });
+};
 
 class MyApp extends App {
+  static async getInitialProps({ Component, ctx }: any) {
+    let pageProps = {};
+
+    if (Component.getInitialProps) {
+      pageProps = await Component.getInitialProps(ctx);
+    }
+
+    return { pageProps };
+  }
+
   render() {
     const { Component, pageProps } = this.props;
+    const items = [
+      {
+        id: this.props.router.route,
+        Component,
+        pageProps,
+      },
+    ];
+
     return (
       <>
-        <Component {...pageProps} />
+        <Layout>
+          <div style={{ position: "relative" }}>
+            <PageContainer items={items}>
+              {({ transitions }) => (
+                <>
+                  {transitions.map(({ item, props, key }) => (
+                    <animated.div
+                      key={key}
+                      style={{
+                        ...props,
+                        position: "absolute",
+                        width: "100%",
+                      }}
+                    >
+                      <Component {...item.pageProps} />
+                    </animated.div>
+                  ))}
+                </>
+              )}
+            </PageContainer>
+          </div>
+        </Layout>
+
         <style jsx global>
           {`
             @font-face {

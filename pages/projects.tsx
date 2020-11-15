@@ -1,7 +1,5 @@
-import Layout from "../components/UI/Layout";
-
 const ProjectsPage = () => {
-  return <Layout></Layout>;
+  return <div>Projects</div>;
 };
 
 export default ProjectsPage;

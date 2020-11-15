@@ -1,5 +1,5 @@
-import Layout from "../components/UI/Layout";
-
-const IndexPage = () => <Layout title="About"></Layout>;
+const IndexPage = () => {
+  return <div>About Page</div>;
+};
 
 export default IndexPage;

@@ -5,21 +5,25 @@ import { TComponent } from "..";
 import Container from "../UI/Container";
 import TextLink from "../UI/TextLink";
 import Icon from "../UI/Icon";
+import data from "../../data/profile.json";
 
 interface Props extends TComponent {
   size?: number;
 }
 
-const Social = ({ className, size }: Props) => {
+const Social = ({ className, size, "data-testid": testId }: Props) => {
   return (
-    <Container className={clsx("flex items-center justify-between", className)}>
-      <TextLink href="/">
+    <Container
+      data-testid={testId || "social"}
+      className={clsx("flex items-center justify-between", className)}
+    >
+      <TextLink newTab href={data.social.github}>
         <Icon SVG={SiGithub} size={size} />
       </TextLink>
-      <TextLink href="/">
+      <TextLink newTab href="/">
         <Icon SVG={SiDribbble} size={size} />
       </TextLink>
-      <TextLink href="/">
+      <TextLink newTab href="/">
         <Icon SVG={SiLinkedin} size={size} />
       </TextLink>
     </Container>
