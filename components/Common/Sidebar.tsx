@@ -11,7 +11,7 @@ interface Props extends TComponent {}
 const Sidebar = ({}: Props) => {
   return (
     <Container>
-      <Heading>Steven Hansel</Heading>
+      <Heading className="text-6xl">Steven Hansel</Heading>
       <Paragraph>
         a passionate software engineer building robust web & mobile
         applications. Interested at TypeScript, React, Node.js & GraphQL
