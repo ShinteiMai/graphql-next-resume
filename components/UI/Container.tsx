@@ -1,14 +1,12 @@
 import React from "react";
 import clsx from "clsx";
+import { TComponent } from "..";
 
-type Props = {
-  children?: React.ReactNode;
-  className?: string;
-};
+interface Props extends TComponent {}
 
-const Container = ({ children, className }: Props) => {
+const Container = ({ children, className, "data-testid": testId }: Props) => {
   return (
-    <div data-testid="container" className={clsx("", className)}>
+    <div data-testid={testId || "container"} className={clsx("", className)}>
       {children}
     </div>
   );

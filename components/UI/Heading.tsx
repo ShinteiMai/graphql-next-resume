@@ -1,11 +1,10 @@
 import React from "react";
 import clsx from "clsx";
+import { TComponent } from "..";
 
-type Props = {
+interface Props extends TComponent {
   is?: "h1" | "h2" | "h3";
-  children?: React.ReactNode;
-  className?: string;
-};
+}
 
 const Heading = ({ is, children, className }: Props) => {
   const Tag = React.createElement(

@@ -1,12 +1,13 @@
 import React from "react";
 import Image from "next/image";
+import { TComponent } from "..";
 
-type Props = {
+interface Props extends TComponent {
   src: string;
   alt?: string;
   width?: number | string;
   height?: number | string;
-};
+}
 
 const Avatar = ({ src, width, height }: Props) => {
   return (

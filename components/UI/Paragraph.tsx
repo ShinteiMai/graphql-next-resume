@@ -1,10 +1,8 @@
 import React from "react";
 import clsx from "clsx";
+import { TComponent } from "..";
 
-type Props = {
-  children?: React.ReactNode;
-  className?: string;
-};
+interface Props extends TComponent {}
 
 const Paragraph = ({ children, className }: Props) => {
   return (
