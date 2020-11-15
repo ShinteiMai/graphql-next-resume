@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "scripts": {
     "dev": "next",
-    "build": "next build",
+    "build": "next build && next export",
     "start": "next start",
     "test": "jest --watch",
     "integration": "cypress open",
@@ -24,6 +24,7 @@
     "postcss-import": "^13.0.0",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
+    "react-icons": "^3.11.0",
     "tailwindcss": "^1.9.6"
   },
   "devDependencies": {
