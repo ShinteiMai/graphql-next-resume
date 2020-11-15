@@ -31,3 +31,5 @@ describe("Index page", () => {
     cy.get("[data-testid=count]").invoke("text").should("eq", "-2");
   });
 });
+
+export {};

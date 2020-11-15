@@ -43,7 +43,12 @@ module.exports = {
         166: "39rem",
         178: "42rem",
       },
-      colors: {},
+      colors: {
+        primary: "#64FFDA",
+        "accents-0": "#323030",
+        "accents-1": "#CACACA",
+        "accents-2": "#E9E9E9",
+      },
     },
   },
 };
