@@ -5,5 +5,27 @@
     "github": "https://github.com/ShinteiMai",
     "dribbbble": "https://dribbble.com/shinteimai",
     "linkedin": "https://www.linkedin.com/in/stevenhansel/"
-  }
+  },
+  "links": {
+    "binus": "https://binus.ac.id",
+    "kotakode": "https://kotakode.com"
+  },
+  "resume": "https://drive.google.com/file/d/13Wkt-o6vnx8eDiqbFaIew5uFKDJDNglG/view?usp=sharing",
+  "experience": [
+    {
+      "role": "Fullstack Developer Intern",
+      "company": "Kotakode",
+      "link": "https://kotakode.com",
+      "time": {
+        "start": "Aug 2020",
+        "end": "Present"
+      },
+      "technologies": [0, 1, 4, 5],
+      "points": [
+        "Integrated Github OAuth Flow into Kotakode's existing authentication system",
+        "Built a mentioning feature that is integrated into the notification feature where users are able to mention each other through questions, answers, comments, and blogs",
+        "Implemented TDD in the scope of unit testing until E2E testing with Cypress"
+      ]
+    }
+  ]
 }

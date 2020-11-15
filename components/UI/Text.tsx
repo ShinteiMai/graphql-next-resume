@@ -6,7 +6,7 @@ interface Props extends TComponent {}
 
 const Text = ({ className, children }: Props) => {
   return (
-    <span data-testid="text" className={clsx("text-base", className)}>
+    <span data-testid="text" className={clsx("text-accents-1", className)}>
       {children}
     </span>
   );

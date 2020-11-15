@@ -24,7 +24,7 @@ const PageContainer = ({ children, items }: Props) => {
     enter: { opacity: 1 },
     leave: { opacity: 0 },
     config: {
-      duration: 750,
+      duration: 1000,
     },
   });
   return children({

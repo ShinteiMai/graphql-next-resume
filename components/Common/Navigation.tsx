@@ -28,19 +28,26 @@ const Navigation = ({ className }: Props) => {
 
   return (
     <Container
+      data-testid="navigation"
       className={clsx(
         "w-full flex justify-evenly items-start md:block",
         className
       )}
     >
       <Tab isActive={activeTab === "about"} className="mb-3">
-        <TextLink href="/">About</TextLink>
+        <TextLink className="inline-block" href="/">
+          About
+        </TextLink>
       </Tab>
       <Tab isActive={activeTab === "projects"} className="mb-3">
-        <TextLink href="/projects">Projects</TextLink>
+        <TextLink className="inline-block" href="/projects">
+          Projects
+        </TextLink>
       </Tab>
       <Tab isActive={activeTab === "contact"}>
-        <TextLink href="/contact">Contact</TextLink>
+        <TextLink className="inline-block" href="/contact">
+          Contact
+        </TextLink>
       </Tab>
     </Container>
   );

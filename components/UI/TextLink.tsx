@@ -20,7 +20,10 @@ const TextLink = ({
       {newTab ? (
         <a
           data-testid={testId || "text-link-new-tab"}
-          className={clsx("no-underline cursor-pointer", className)}
+          className={clsx(
+            "no-underline cursor-pointer transition-all duration-200 ease-in-out",
+            className
+          )}
           target="_blank"
           rel="noopener noreferrer"
         >

@@ -1,6 +1,8 @@
 import React from "react";
 import clsx from "clsx";
 import { TComponent } from "..";
+import Divider from "./Divider";
+import Container from "./Container";
 
 interface Props extends TComponent {
   onClick?: () => void;
@@ -9,20 +11,26 @@ interface Props extends TComponent {
 
 const Tab = ({ className, onClick, children, isActive }: Props) => {
   return (
-    <div
-      onClick={onClick}
-      data-testid="tab"
-      className={clsx(
-        {
-          "text-primary": isActive,
-          "font-medium": isActive,
-          "transform hover:text-primary hover:-translate-y-1 hover:text-opacity-75 transition-all duration-200 ease-in-out": !isActive,
-        },
-        className
-      )}
-    >
-      {children}
-    </div>
+    <Container className="flex">
+      {isActive && <Divider className="hidden md:inline-block" height={36} />}
+
+      <div
+        onClick={onClick}
+        data-testid="tab"
+        className={clsx(
+          "inline-block ml-0 md:ml-3 md:flex md:items-center",
+          {
+            "text-primary": isActive,
+            "font-medium": isActive,
+            "transform hover:text-primary hover:-translate-y-1 hover:text-opacity-75 transition-all duration-200 ease-in-out": !isActive,
+            "border-b md:border-0 border-primary": isActive,
+          },
+          className
+        )}
+      >
+        {children}
+      </div>
+    </Container>
   );
 };
 export default Tab;

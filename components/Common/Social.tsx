@@ -20,10 +20,10 @@ const Social = ({ className, size, "data-testid": testId }: Props) => {
       <TextLink newTab href={data.social.github}>
         <Icon SVG={SiGithub} size={size} />
       </TextLink>
-      <TextLink newTab href="/">
+      <TextLink newTab href={data.social.dribbbble}>
         <Icon SVG={SiDribbble} size={size} />
       </TextLink>
-      <TextLink newTab href="/">
+      <TextLink newTab href={data.social.linkedin}>
         <Icon SVG={SiLinkedin} size={size} />
       </TextLink>
     </Container>
