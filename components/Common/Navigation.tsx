@@ -1,16 +1,47 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import clsx from "clsx";
 import { TComponent } from "..";
 import Container from "../UI/Container";
 import Tab from "../UI/Tab";
+import TextLink from "../UI/TextLink";
+import { useRouter } from "next/router";
+
+type NavigationTabs = "about" | "projects" | "contact";
 
 interface Props extends TComponent {}
 
-const Navigation = ({}: Props) => {
+const Navigation = ({ className }: Props) => {
+  const router = useRouter();
+  const [activeTab, setActiveTab] = useState<NavigationTabs>(
+    router.pathname.slice(1) === ""
+      ? "about"
+      : (router.pathname.slice(1) as NavigationTabs)
+  );
+
+  useEffect(() => {
+    setActiveTab(
+      router.pathname.slice(1) === ""
+        ? "about"
+        : (router.pathname.slice(1) as NavigationTabs)
+    );
+  }, [router]);
+
   return (
-    <Container>
-      <Tab>About</Tab>
-      <Tab>Projects</Tab>
-      <Tab>Contact</Tab>
+    <Container
+      className={clsx(
+        "w-full flex justify-evenly items-start md:block",
+        className
+      )}
+    >
+      <Tab isActive={activeTab === "about"} className="mb-3">
+        <TextLink href="/">About</TextLink>
+      </Tab>
+      <Tab isActive={activeTab === "projects"} className="mb-3">
+        <TextLink href="/projects">Projects</TextLink>
+      </Tab>
+      <Tab isActive={activeTab === "contact"}>
+        <TextLink href="/contact">Contact</TextLink>
+      </Tab>
     </Container>
   );
 };

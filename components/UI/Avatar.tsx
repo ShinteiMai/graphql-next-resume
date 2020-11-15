@@ -1,5 +1,5 @@
 import React from "react";
-import Image from "next/image";
+import clsx from "clsx";
 import { TComponent } from "..";
 
 interface Props extends TComponent {
@@ -9,14 +9,17 @@ interface Props extends TComponent {
   height?: number | string;
 }
 
-const Avatar = ({ src, width, height }: Props) => {
+const Avatar = ({ src, className, width, height, alt }: Props) => {
   return (
-    <Image
-      priority
+    <img
+      className={clsx(
+        "inline object-cover h-24 w-24 rounded-full text-white shadow-solid",
+        className
+      )}
       src={src}
-      alt="Avatar"
-      width={width ?? "120px"}
-      height={height ?? "120px"}
+      alt={alt || "Avatar"}
+      width={width || "120px"}
+      height={height || "120px"}
     />
   );
 };

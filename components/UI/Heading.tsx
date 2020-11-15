@@ -11,7 +11,7 @@ const Heading = ({ is, children, className }: Props) => {
     is || "h1",
     {
       "data-testid": "heading",
-      className: clsx("text-3xl", className),
+      className: clsx("text-accents-2", className),
     },
     children
   );

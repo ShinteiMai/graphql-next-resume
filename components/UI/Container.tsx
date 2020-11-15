@@ -6,7 +6,7 @@ interface Props extends TComponent {}
 
 const Container = ({ children, className, "data-testid": testId }: Props) => {
   return (
-    <div data-testid={testId || "container"} className={clsx("", className)}>
+    <div data-testid={testId || "container"} className={clsx(className)}>
       {children}
     </div>
   );
