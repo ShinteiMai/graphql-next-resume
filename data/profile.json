@@ -31,5 +31,18 @@
         "Implemented TDD in the scope of unit testing until E2E testing with Cypress"
       ]
     }
+  ],
+  "projects": [
+    {
+      "title": "React Pokédex",
+      "src": "https://stevenhansel.s3-ap-southeast-1.amazonaws.com/react-pokedex.mp4",
+      "technologies": [0, 1, 6],
+      "description": "a simple pokédex to look up at pokémons. View your favorite pokemon information in a detailed manner. Huge thanks to  PokéAPI for making this project possible.",
+      "links": {
+        "github": "https://github.com/ShinteiMai/react-pokedex",
+        "external": "https://pokedex.stevenhansel.com",
+        "dribbble": ""
+      }
+    }
   ]
 }

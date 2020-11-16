@@ -1,13 +1,20 @@
 import React from "react";
 import { useTrail, animated } from "react-spring";
+import { TComponent } from "..";
 
-type Props = {
+interface Props extends TComponent {
   children: React.ReactNode;
   open: boolean;
   className?: string;
-};
+}
 
-const Trail = ({ open, children, className, ...props }: Props) => {
+const Trail = ({
+  open,
+  children,
+  className,
+  "data-testid": testId,
+  ...props
+}: Props) => {
   const items = React.Children.toArray(children);
   const trail = useTrail(items.length, {
     config: { mass: 5, tension: 2000, friction: 200 },
@@ -17,7 +24,7 @@ const Trail = ({ open, children, className, ...props }: Props) => {
     from: { opacity: 0, x: 20, height: 0 },
   });
   return (
-    <div {...props}>
+    <div data-testid={testId || "trail"} {...props}>
       <div>
         {trail.map(({ x, height, ...rest }, index) => (
           <animated.div

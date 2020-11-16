@@ -14,17 +14,17 @@ const IndexPage = () => {
       <Heading className="text-5xl font-medium hidden md:block">About</Heading>
       <Container className="mt-6">
         <Heading className="text-xl font-medium">Biography</Heading>
-        <Paragraph className="mt-2">
+        <Paragraph className="mt-3">
           Hi! I’m Steven Hansel. A software engineer based in Jakarta,
           Indonesia.
         </Paragraph>
-        <Paragraph className="mt-2">
+        <Paragraph className="mt-3">
           I enjoy building software such as web & mobile applications with the
           most modern & latest technology available. My purpose is to create
           robust software following software engineering principles & best
           practices.
         </Paragraph>
-        <Paragraph className="mt-2">
+        <Paragraph className="mt-3">
           I’m currently studying Computer Engineering in{" "}
           <TextLink href={data.links.binus} newTab className="text-primary">
             BINUS University
