@@ -57,8 +57,9 @@ const Experience = ({}: Props) => {
             <Container className="flex flex-wrap mt-2">
               {tech.map(({ id, thumbnail, title }) => (
                 <Technology
+                  detailed={false}
                   src={thumbnail}
-                  alt={title}
+                  title={title}
                   key={id}
                   className="mr-3"
                   width={30}

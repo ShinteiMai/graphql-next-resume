@@ -1,6 +1,10 @@
 {
   "name": "Steven Hansel",
-  "bio": "",
+  "biography": {
+    "short": "a passionate software engineer building robust web & mobile applications. Interested in TypeScript, React, NestJS & GraphQL",
+    "long": []
+  },
+  "profilePicture": "https://stevenhansel.s3-ap-southeast-1.amazonaws.com/profile.png",
   "social": {
     "github": "https://github.com/ShinteiMai",
     "dribbbble": "https://dribbble.com/shinteimai",
@@ -10,7 +14,7 @@
     "binus": "https://binus.ac.id",
     "kotakode": "https://kotakode.com"
   },
-  "resume": "https://drive.google.com/file/d/13Wkt-o6vnx8eDiqbFaIew5uFKDJDNglG/view?usp=sharing",
+  "resume": "https://stevenhansel.s3-ap-southeast-1.amazonaws.com/resume.pdf",
   "experience": [
     {
       "role": "Fullstack Developer Intern",
