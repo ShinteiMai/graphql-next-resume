@@ -2,35 +2,10 @@ import React from "react";
 import App from "next/app";
 import "../index.css";
 import Layout from "../components/UI/Layout";
-import { animated, useTransition, UseTransitionResult } from "react-spring";
-import { NextComponentType, NextPageContext } from "next";
-
-interface Props {
-  children: ({
-    transitions,
-  }: {
-    transitions: UseTransitionResult<any, any>[];
-  }) => JSX.Element;
-  items: {
-    id: string;
-    Component: NextComponentType<NextPageContext, any, {}>;
-    pageProps: any;
-  }[];
-}
-
-const PageContainer = ({ children, items }: Props) => {
-  const transitions = useTransition(items, (p) => p.id, {
-    from: { opacity: 0 },
-    enter: { opacity: 1 },
-    leave: { opacity: 0 },
-    config: {
-      duration: 1000,
-    },
-  });
-  return children({
-    transitions,
-  });
-};
+import { animated, Transition } from "react-spring";
+import Container from "../components/UI/Container";
+import Heading from "../components/UI/Heading";
+import { capitalize } from "../utils/capitalize";
 
 class MyApp extends App {
   static async getInitialProps({ Component, ctx }: any) {
@@ -56,26 +31,38 @@ class MyApp extends App {
     return (
       <>
         <Layout>
-          <div style={{ position: "relative" }}>
-            <PageContainer items={items}>
-              {({ transitions }) => (
-                <>
-                  {transitions.map(({ item, props, key }) => (
-                    <animated.div
-                      key={key}
-                      style={{
-                        ...props,
-                        position: "absolute",
-                        width: "100%",
-                      }}
-                    >
-                      <Component {...item.pageProps} />
-                    </animated.div>
-                  ))}
-                </>
+          <Container className="relative">
+            <Heading className="text-5xl font-medium hidden md:block">
+              {this.props.router.pathname.slice(1) === ""
+                ? "About"
+                : capitalize(this.props.router.pathname.slice(1))}
+            </Heading>
+            <Transition
+              items={items}
+              keys={(item) => item.id}
+              from={{ opacity: 0, transform: "translate3d(-10%,0,0)" }}
+              initial={{ opacity: 0 }}
+              enter={{ opacity: 1, transform: "translate3d(0%,0,0)" }}
+              leave={{
+                opacity: 0,
+                position: "absolute",
+                transform: "translate3d(5%,0,0)",
+              }}
+              config={{ duration: 500 }}
+            >
+              {(styles, { pageProps, Component }) => (
+                <animated.div
+                  style={{
+                    ...styles,
+                    position: "absolute",
+                    width: "100%",
+                  }}
+                >
+                  <Component {...pageProps} />
+                </animated.div>
               )}
-            </PageContainer>
-          </div>
+            </Transition>
+          </Container>
         </Layout>
 
         <style jsx global>

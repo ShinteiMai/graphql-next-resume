@@ -4,50 +4,58 @@
       "id": 0,
       "title": "React",
       "description": "",
-      "thumbnail": "/images/react.png"
+      "thumbnail": "/images/react.png",
+      "link": "https://reactjs.org/"
     },
     {
       "id": 1,
       "title": "TypeScript",
       "description": "",
-      "thumbnail": "/images/typescript.png"
+      "thumbnail": "/images/typescript.png",
+      "link": "https://www.typescriptlang.org/"
     },
 
     {
       "id": 2,
       "title": "GraphQL",
       "description": "",
-      "thumbnail": "/images/graphql.png"
+      "thumbnail": "/images/graphql.png",
+      "link": "https://graphql.org/"
     },
     {
       "id": 3,
       "title": "NestJS",
       "description": "",
-      "thumbnail": "/images/nestjs.png"
+      "thumbnail": "/images/nestjs.png",
+      "link": "https://nestjs.com/"
     },
     {
       "id": 4,
-      "title": "Express",
+      "title": "Node.js",
       "description": "",
-      "thumbnail": "/images/express.png"
+      "thumbnail": "/images/express.png",
+      "link": "https://nodejs.org/en/"
     },
     {
       "id": 5,
       "title": "PostgreSQL",
       "description": "",
-      "thumbnail": "/images/postgresql.png"
+      "thumbnail": "/images/postgresql.png",
+      "link": "https://www.postgresql.org/"
     },
     {
       "id": 6,
       "title": "Tailwind CSS",
       "description": "",
-      "thumbnail": "/images/tailwind.png"
+      "thumbnail": "/images/tailwind.png",
+      "link": "https://tailwindcss.com/"
     },
     {
       "id": 7,
       "title": "Chakra UI",
       "description": "",
-      "thumbnail": "/images/chakraui.png"
+      "thumbnail": "/images/chakraui.png",
+      "link": "https://chakra-ui.com/"
     }
   ]
 }

@@ -11,7 +11,6 @@ import Technology from "../components/Common/Technology";
 const IndexPage = () => {
   return (
     <Container>
-      <Heading className="text-5xl font-medium hidden md:block">About</Heading>
       <Container className="mt-6">
         <Heading className="text-xl font-medium">Biography</Heading>
         <Paragraph className="mt-3">
@@ -44,10 +43,11 @@ const IndexPage = () => {
         <Container className="mt-8">
           <Heading className="text-xl font-medium">Stacks</Heading>
           <Container className="grid grid-cols-4 lg:grid-cols-8 mt-4 gap-y-6">
-            {technologies.map(({ id, thumbnail, title }) => (
+            {technologies.map(({ id, thumbnail, title, link }) => (
               <Technology
                 src={thumbnail}
                 title={title}
+                link={link}
                 key={id}
                 className="mr-3"
                 width={50}
