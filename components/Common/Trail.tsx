@@ -18,10 +18,8 @@ const Trail = ({
   const items = React.Children.toArray(children);
   const trail = useTrail(items.length, {
     config: { mass: 5, tension: 2000, friction: 200 },
-    opacity: open ? 1 : 0,
-    x: open ? 0 : 20,
-    height: open ? 110 : 0,
-    from: { opacity: 0, x: 20, height: 0 },
+    height: open ? "110px" : 0,
+    from: { x: 20, height: 0 },
   });
   return (
     <div data-testid={testId || "trail"} {...props}>
@@ -31,7 +29,6 @@ const Trail = ({
             key={index}
             style={{
               ...rest,
-              // @ts-ignore
               transform: x.interpolate((x) => `translate3d(0,${x}px,0)`),
             }}
           >
