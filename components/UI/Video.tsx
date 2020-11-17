@@ -13,6 +13,7 @@ const Video = ({ src, className }: Props) => {
 
   return (
     <video
+      preload="metadata"
       className={clsx("w-full lg:w-96 cursor-pointer", className)}
       src={src}
       loop

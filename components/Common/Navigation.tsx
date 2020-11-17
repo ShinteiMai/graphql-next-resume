@@ -26,8 +26,6 @@ const Navigation = ({ className }: Props) => {
     );
   }, [router]);
 
-  console.log(router.pathname.slice(1));
-
   return (
     <Container
       data-testid="navigation"
@@ -36,17 +34,17 @@ const Navigation = ({ className }: Props) => {
         className
       )}
     >
-      <Tab isActive={activeTab === "about"} className="mb-3">
+      <Tab divider={false} isActive={activeTab === "about"} className="mb-3">
         <TextLink className="inline-block" href="/">
           About
         </TextLink>
       </Tab>
-      <Tab isActive={activeTab === "projects"} className="mb-3">
+      <Tab divider={false} isActive={activeTab === "projects"} className="mb-3">
         <TextLink className="inline-block" href="/projects">
           Projects
         </TextLink>
       </Tab>
-      <Tab isActive={activeTab === "contact"}>
+      <Tab divider={false} isActive={activeTab === "contact"}>
         <TextLink className="inline-block" href="/contact">
           Contact
         </TextLink>

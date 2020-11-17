@@ -7,13 +7,21 @@ import Container from "./Container";
 interface Props extends TComponent {
   onClick?: () => void;
   isActive: boolean;
+  divider?: boolean;
 }
 
-const Tab = ({ className, onClick, children, isActive }: Props) => {
+const Tab = ({
+  className,
+  onClick,
+  children,
+  isActive,
+  divider = true,
+}: Props) => {
   return (
     <Container className="flex">
-      {isActive && <Divider className="hidden lg:inline-block" height={36} />}
-
+      {isActive && divider && (
+        <Divider className={clsx("hidden lg:block", {})} height={36} />
+      )}
       <div
         onClick={onClick}
         data-testid="tab"
@@ -23,7 +31,8 @@ const Tab = ({ className, onClick, children, isActive }: Props) => {
             "text-primary": isActive,
             "font-medium": isActive,
             "transform hover:text-primary hover:-translate-y-1 hover:text-opacity-75 transition-all duration-200 ease-in-out": !isActive,
-            "border-b md:border-0 border-primary": isActive,
+            "border-b border-primary": isActive,
+            "md:border-0": isActive && divider,
           },
           className
         )}

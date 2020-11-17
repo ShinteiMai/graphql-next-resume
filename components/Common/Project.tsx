@@ -30,7 +30,7 @@ const Project = ({ src, title, description, technologies, links }: Props) => {
       <Video src={src} />
       <Container className="flex flex-col ml-0 lg:ml-6 mt-3 lg:mt-0">
         <Container className="flex justify-between items-center mb-3">
-          <Heading className="text-2xl font-medium">{title}</Heading>
+          <Heading className="text-2xl font-medium lg:mb-0">{title}</Heading>
           <Container className="flex items-center">
             {tech.map((t) => (
               <Technology
@@ -46,7 +46,7 @@ const Project = ({ src, title, description, technologies, links }: Props) => {
             ))}
           </Container>
         </Container>
-        <Paragraph className="hidden md:block">{description}</Paragraph>
+        <Paragraph className="block mb-4 lg:mb-0">{description}</Paragraph>
         <Links {...links} className="w-24 mt-0 md:mt-3 lg:mt-auto" />
       </Container>
     </Container>

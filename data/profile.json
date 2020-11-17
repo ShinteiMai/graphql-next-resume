@@ -28,7 +28,7 @@
       "points": [
         "Integrated Github OAuth Flow into Kotakode's existing authentication system",
         "Built a mentioning feature that is integrated into the notification feature where users are able to mention each other through questions, answers, comments, and blogs",
-        "Implemented TDD in the scope of unit testing until E2E testing with Cypress"
+        "Implemented TDD in the scope of unit testing to E2E testing with Cypress"
       ]
     }
   ],
@@ -37,7 +37,7 @@
       "title": "React Pokédex",
       "src": "https://stevenhansel.s3-ap-southeast-1.amazonaws.com/react-pokedex.mp4",
       "technologies": [0, 1, 6],
-      "description": "a simple pokédex to look up at pokémons. View your favorite pokemon information in a detailed manner. Huge thanks to  PokéAPI for making this project possible.",
+      "description": "a simple & modern pokédex to look up at pokémons. View your favorite pokemon status & information with elegant & fashion. The data of the pokemons was fetched from PokéAPI, which is an open-source public API that serves pokemons data, please support them! .",
       "links": {
         "github": "https://github.com/ShinteiMai/react-pokedex",
         "external": "https://pokedex.stevenhansel.com",
