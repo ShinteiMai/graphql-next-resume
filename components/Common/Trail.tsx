@@ -18,20 +18,18 @@ const Trail = ({ open, children, className, ...props }: Props) => {
   });
   return (
     <div {...props}>
-      <div>
-        {trail.map(({ x, height, ...rest }, index) => (
-          <animated.div
-            key={index}
-            style={{
-              ...rest,
-              // @ts-ignore
-              transform: x.interpolate((x) => `translate3d(0,${x}px,0)`),
-            }}
-          >
-            <animated.div className={className}>{items[index]}</animated.div>
-          </animated.div>
-        ))}
-      </div>
+      {trail.map(({ x, height, opacity, ...rest }, index) => (
+        <animated.div
+          key={index}
+          style={{
+            ...rest,
+            opacity: opacity as any,
+            transform: x.to((x) => `translate3d(0,${x}px,0)`),
+          }}
+        >
+          <animated.div className={className}>{items[index]}</animated.div>
+        </animated.div>
+      ))}
     </div>
   );
 };

@@ -10,6 +10,7 @@ interface Props extends TComponent {
   detailed?: boolean;
   src: string;
   title: string;
+  link: string;
   width?: number;
   height?: number;
 }
@@ -21,9 +22,12 @@ const Technology = ({
   "data-testid": testId,
   width,
   height,
+  link,
   detailed = true,
 }: Props) => {
   const [showTitle, setShowTitle] = useState<boolean>(false);
+  const [isActivated, setIsActivated] = useState<boolean>(false);
+
   return (
     <Container
       data-testid={testId || "technology"}
@@ -34,13 +38,23 @@ const Technology = ({
         alt={title || "Technology"}
         width={`${width}px` || "50px"}
         height={`${height}px` || "50px"}
-        className="transform hover:-translate-y-1 transition-all duration-200 ease-in-out"
-        onMouseEnter={() => setShowTitle(true)}
-        onMouseLeave={() => setShowTitle(false)}
+        className={clsx(
+          "cursor-pointer transform hover:-translate-y-1 transition-all duration-200 ease-in-out",
+          {
+            "-translate-y-1": isActivated,
+          }
+        )}
+        onMouseEnter={() => {
+          if (!isActivated) setShowTitle(true);
+        }}
+        onMouseLeave={() => {
+          if (!isActivated) setShowTitle(false);
+        }}
+        onClick={() => setIsActivated(!isActivated)}
       />
       {detailed && (
         <Trail open={showTitle}>
-          <TextLink href="/" className="mt-auto text-xs text-primary">
+          <TextLink newTab href={link} className="mt-auto text-xs text-primary">
             @{title}
           </TextLink>
         </Trail>
