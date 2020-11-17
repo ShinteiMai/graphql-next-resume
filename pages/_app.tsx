@@ -32,7 +32,7 @@ class MyApp extends App {
       <>
         <Layout>
           <Container className="relative">
-            <Heading className="text-5xl font-medium hidden md:block">
+            <Heading className="text-5xl font-medium hidden lg:block">
               {this.props.router.pathname.slice(1) === ""
                 ? "About"
                 : capitalize(this.props.router.pathname.slice(1))}

@@ -30,7 +30,7 @@ const Navigation = ({ className }: Props) => {
     <Container
       data-testid="navigation"
       className={clsx(
-        "w-full flex justify-evenly items-start md:block",
+        "w-full flex justify-evenly items-start lg:block",
         className
       )}
     >

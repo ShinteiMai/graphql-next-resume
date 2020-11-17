@@ -20,12 +20,12 @@ const Sidebar = ({ className, "data-testid": testId }: Props) => {
       <Heading className="text-xl md:text-lg font-medium mb-4 md:mb-0">
         {data.name}
       </Heading>
-      <Paragraph className="hidden md:block mb-6">
+      <Paragraph className="hidden md:block mb-6 w-full md:w-3/5 lg:w-full md:mx-auto lg:mx-0">
         {data.biography.short}
       </Paragraph>
-      <Container className="flex items-center justify-evenly md:inline-block mb-4 md:mb-0">
-        <Social className="md:mb-6 md:mx-0 w-24" />
-        <Button className="md:mb-16">
+      <Container className="flex items-center justify-evenly lg:inline-block mb-4 lg:mb-0">
+        <Social className="lg:mb-6 lg:mx-0 w-24" />
+        <Button className="lg:mb-16">
           <TextLink newTab href={data.resume}>
             Resume
           </TextLink>

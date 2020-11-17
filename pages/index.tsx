@@ -11,7 +11,7 @@ import Technology from "../components/Common/Technology";
 const IndexPage = () => {
   return (
     <Container>
-      <Container className="mt-6">
+      <Container className="mt-0 md:mt-4 lg:mt-6">
         <Heading className="text-xl font-medium">Biography</Heading>
         <Paragraph className="mt-3">
           Hi! I’m Steven Hansel. A software engineer based in Jakarta,

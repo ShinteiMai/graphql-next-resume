@@ -21,11 +21,11 @@ const Layout = ({ children }: Props) => {
         <meta charSet="utf-8" />
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
-      <Container className="flex flex-col md:flex-row px-0 sm:px-12 md:px-24 lg:px-48 py-6 md:py-12 lg:py-24 w-3/4 sm:w-full mx-auto">
-        <Sidebar className="block md:fixed w-full sm:w-full md:w-56 mx-auto md:mx-0 text-center md:text-left" />
+      <Container className="flex flex-col lg:flex-row px-0 sm:px-12 md:px-24 lg:px-48 py-6 md:py-12 lg:py-24 w-3/4 sm:w-full mx-auto">
+        <Sidebar className="block lg:fixed w-full lg:w-56 mx-auto lg:mx-0 text-center lg:text-left" />
         <Container
           data-testid="mainContainer"
-          className="ml-0 md:ml-56 w-full lg:w-4/6 px-0 md:px-16 lg:px-32 py-4 md:py-0"
+          className="ml-0 lg:ml-84 w-full lg:w-1/2 px-0 lg:px-28 py-4 md:py-0"
         >
           {children}
         </Container>
