@@ -48,7 +48,7 @@ class MyApp extends App {
                 position: "absolute",
                 transform: "translate3d(5%,0,0)",
               }}
-              config={{ duration: 500 }}
+              config={{ duration: 250 }}
             >
               {(styles, { pageProps, Component }) => (
                 <animated.div

@@ -10,7 +10,7 @@ import Technology from "../components/Common/Technology";
 
 const IndexPage = () => {
   return (
-    <Container>
+    <Container className="w-full lg:w-3/5">
       <Container className="mt-0 md:mt-4 lg:mt-6">
         <Heading className="text-xl font-medium">Biography</Heading>
         <Paragraph className="mt-3">

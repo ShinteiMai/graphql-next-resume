@@ -10,7 +10,7 @@ interface Props extends TComponent {
 const Video = ({ src }: Props) => {
   return (
     <video
-      className="w-full md:w-84 lg:w-120 rounded-sm"
+      className="w-full lg:w-1/4 rounded"
       src={src}
       loop
       onMouseOver={(e: React.MouseEvent<HTMLVideoElement, MouseEvent>) =>
