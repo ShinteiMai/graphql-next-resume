@@ -5,7 +5,6 @@ import Button from "../UI/Button";
 import Container from "../UI/Container";
 import Heading from "../UI/Heading";
 import Paragraph from "../UI/Paragraph";
-import TextLink from "../UI/TextLink";
 import Navigation from "./Navigation";
 import Social from "./Social";
 
@@ -25,10 +24,8 @@ const Sidebar = ({ className, "data-testid": testId }: Props) => {
       </Paragraph>
       <Container className="flex items-center justify-evenly lg:inline-block mb-4 lg:mb-0">
         <Social className="lg:mb-6 lg:mx-0 w-24" />
-        <Button className="lg:mb-16">
-          <TextLink newTab href={data.resume}>
-            Resume
-          </TextLink>
+        <Button link={data.resume} className="lg:mb-16">
+          Resume
         </Button>
       </Container>
 

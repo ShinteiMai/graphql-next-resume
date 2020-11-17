@@ -3,6 +3,7 @@ import React from "react";
 import { TComponent } from "..";
 
 interface Props extends TComponent {
+  link?: string;
   onClick?: () => void;
 }
 
@@ -11,6 +12,7 @@ const Button = ({
   onClick,
   "data-testid": testId,
   className,
+  link,
 }: Props) => {
   return (
     <button
@@ -18,7 +20,13 @@ const Button = ({
         "bg-transparent text-primary text-sm py-1 px-6 border border-primary hover:border-transparent rounded-md transform hover:bg-secondary hover:bg-opacity-25 hover:font-medium focus:outline-none focus:-translate-y-1 focus:shadow-md transition-all duration-150",
         className
       )}
-      onClick={onClick}
+      onClick={() => {
+        if (!!link) {
+          window.open(link, "_blank");
+        } else if (onClick) {
+          onClick();
+        }
+      }}
       data-testid={testId || "button"}
     >
       {children}
