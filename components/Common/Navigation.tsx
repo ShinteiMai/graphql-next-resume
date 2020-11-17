@@ -26,6 +26,8 @@ const Navigation = ({ className }: Props) => {
     );
   }, [router]);
 
+  console.log(router.pathname.slice(1));
+
   return (
     <Container
       data-testid="navigation"

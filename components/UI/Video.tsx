@@ -1,4 +1,5 @@
-import React from "react";
+import clsx from "clsx";
+import React, { useState } from "react";
 import { TComponent } from "..";
 
 interface Props extends TComponent {
@@ -7,10 +8,12 @@ interface Props extends TComponent {
   height?: number;
 }
 
-const Video = ({ src }: Props) => {
+const Video = ({ src, className }: Props) => {
+  const [isPlaying, setIsPlaying] = useState<boolean>(false);
+
   return (
     <video
-      className="w-full lg:w-1/4 rounded"
+      className={clsx("w-full lg:w-96 cursor-pointer", className)}
       src={src}
       loop
       onMouseOver={(e: React.MouseEvent<HTMLVideoElement, MouseEvent>) =>
@@ -19,6 +22,15 @@ const Video = ({ src }: Props) => {
       onMouseOut={(e: React.MouseEvent<HTMLVideoElement, MouseEvent>) =>
         e.currentTarget.pause()
       }
+      onClick={(e: React.MouseEvent<HTMLVideoElement, MouseEvent>) => {
+        if (isPlaying) {
+          setIsPlaying(false);
+          e.currentTarget.pause();
+        } else {
+          setIsPlaying(true);
+          e.currentTarget.play();
+        }
+      }}
     />
   );
 };

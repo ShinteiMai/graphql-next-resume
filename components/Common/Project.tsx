@@ -4,6 +4,9 @@ import Container from "../UI/Container";
 import Heading from "../UI/Heading";
 import Paragraph from "../UI/Paragraph";
 import Video from "../UI/Video";
+import Technology from "./Technology";
+import data from "../../data/technologies.json";
+import Links from "./Links";
 
 export type Links = {
   github: string;
@@ -19,13 +22,32 @@ interface Props extends TComponent {
   links: Links;
 }
 
-const Project = ({ src, title, description }: Props) => {
+const Project = ({ src, title, description, technologies, links }: Props) => {
+  const tech = data.technologies.filter((t) => technologies.includes(t.id));
+
   return (
-    <Container className="flex">
+    <Container className="block lg:flex space-between">
       <Video src={src} />
-      <Container>
-        <Heading>{title}</Heading>
-        <Paragraph>{description}</Paragraph>
+      <Container className="flex flex-col ml-0 lg:ml-6 mt-3 lg:mt-0">
+        <Container className="flex justify-between items-center mb-3">
+          <Heading className="text-2xl font-medium">{title}</Heading>
+          <Container className="flex items-center">
+            {tech.map((t) => (
+              <Technology
+                detailed={false}
+                src={t.thumbnail}
+                link={t.link}
+                key={t.id}
+                title={t.title}
+                width={30}
+                height={30}
+                className="mr-3"
+              />
+            ))}
+          </Container>
+        </Container>
+        <Paragraph className="hidden md:block">{description}</Paragraph>
+        <Links {...links} className="w-24 mt-0 md:mt-3 lg:mt-auto" />
       </Container>
     </Container>
   );

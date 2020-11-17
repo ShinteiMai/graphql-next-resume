@@ -12,7 +12,7 @@ interface Props extends TComponent {
 const Tab = ({ className, onClick, children, isActive }: Props) => {
   return (
     <Container className="flex">
-      {isActive && <Divider className="hidden md:inline-block" height={36} />}
+      {isActive && <Divider className="hidden lg:inline-block" height={36} />}
 
       <div
         onClick={onClick}

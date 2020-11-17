@@ -43,7 +43,7 @@ const Layout = ({ children }: Props) => {
           content="https://stevenhansel.s3-ap-southeast-1.amazonaws.com/profile.png"
         />
       </Head>
-      <Container className="flex flex-col lg:flex-row px-0 sm:px-12 md:px-24 lg:px-48 py-6 md:py-12 lg:py-24 w-3/4 sm:w-full mx-auto">
+      <Container className="flex flex-col lg:flex-row px-2 sm:px-12 md:px-24 lg:px-48 py-6 md:py-12 lg:py-24 w-11/12 mx-auto">
         <Sidebar className="block lg:fixed w-full lg:w-56 mx-auto lg:mx-0 text-center lg:text-left" />
         <Container
           data-testid="mainContainer"
