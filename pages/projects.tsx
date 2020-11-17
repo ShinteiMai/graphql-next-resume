@@ -14,6 +14,7 @@ const ProjectsPage = () => {
             description={p.description}
             technologies={p.technologies}
             links={p.links}
+            className="mb-10"
           />
         ))}
       </Container>

@@ -43,6 +43,17 @@
         "external": "https://pokedex.stevenhansel.com",
         "dribbble": ""
       }
+    },
+    {
+      "title": "Portfolio",
+      "src": "https://stevenhansel.s3-ap-southeast-1.amazonaws.com/stevenhansel.mp4",
+      "technologies": [0, 1, 6],
+      "description": "personal portfolio site made with Next.js, it consists of my biography, experience, contacts, and also the projects that i have made either on solo or team projects. The design is based on my favorite color!",
+      "links": {
+        "github": "https://github.com/ShinteiMai/stevenhansel.com",
+        "external": "https://stevenhansel.com",
+        "dribbble": ""
+      }
     }
   ]
 }

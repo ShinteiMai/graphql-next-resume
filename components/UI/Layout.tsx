@@ -13,6 +13,7 @@ const Layout = ({ children }: Props) => {
         <meta charSet="utf-8" />
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
         <title>Steven Hansel</title>
+        <link rel="shortcut icon" href="/images/typescript.png" />
         <meta name="title" content="Steven Hansel" />
         <meta
           name="description"

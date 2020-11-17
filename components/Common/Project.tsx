@@ -7,6 +7,7 @@ import Video from "../UI/Video";
 import Technology from "./Technology";
 import data from "../../data/technologies.json";
 import Links from "./Links";
+import clsx from "clsx";
 
 export type Links = {
   github: string;
@@ -22,11 +23,18 @@ interface Props extends TComponent {
   links: Links;
 }
 
-const Project = ({ src, title, description, technologies, links }: Props) => {
+const Project = ({
+  src,
+  title,
+  description,
+  technologies,
+  links,
+  className,
+}: Props) => {
   const tech = data.technologies.filter((t) => technologies.includes(t.id));
 
   return (
-    <Container className="block lg:flex space-between">
+    <Container className={clsx("block lg:flex space-between", className)}>
       <Video src={src} />
       <Container className="flex flex-col ml-0 lg:ml-6 mt-3 lg:mt-0">
         <Container className="flex justify-between items-center mb-3">
