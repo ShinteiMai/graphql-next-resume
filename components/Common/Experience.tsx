@@ -55,11 +55,12 @@ const Experience = ({}: Props) => {
           <Text className="text-sm flex items-end justify-between">
             Technologies:
             <Container className="flex flex-wrap mt-2">
-              {tech.map(({ id, thumbnail, title }) => (
+              {tech.map(({ id, thumbnail, title, link }) => (
                 <Technology
                   detailed={false}
                   src={thumbnail}
                   title={title}
+                  link={link}
                   key={id}
                   className="mr-3"
                   width={30}
