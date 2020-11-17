@@ -15,7 +15,6 @@ const Video = ({ src, className }: Props) => {
     <video
       preload="metadata"
       className={clsx("w-full lg:w-96 cursor-pointer", className)}
-      src={src}
       loop
       onMouseOver={(e: React.MouseEvent<HTMLVideoElement, MouseEvent>) =>
         e.currentTarget.play()
@@ -32,7 +31,9 @@ const Video = ({ src, className }: Props) => {
           e.currentTarget.play();
         }
       }}
-    />
+    >
+      <source src={`${src}#t=0.1`} type="video/mp4" />
+    </video>
   );
 };
 export default Video;
