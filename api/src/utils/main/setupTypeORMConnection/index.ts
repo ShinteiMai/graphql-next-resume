@@ -1,0 +1,1 @@
+export { setupTypeORMConnection } from "./setupTypeORMConnection";

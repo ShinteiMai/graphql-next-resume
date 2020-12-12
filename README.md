@@ -1,3 +1,3 @@
-# next-tailwind-boilerplate
+# stevenhansel.com
 
-A battery-packaged boilerplate for Next.js + Tailwind integrated with TypeScript support and full unit & integration testing modules such as react-testing-library and Cypress.
+my personal site containing my biography, projects, and a personal blog.

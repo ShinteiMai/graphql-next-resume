@@ -1,0 +1,9 @@
+{
+  "recommendations": [
+    "esbenp.prettier-vscode",
+    "graphql.vscode-graphql",
+    "dbaeumer.vscode-eslint",
+    "kumar-harsh.graphql-for-vscode",
+    "rvest.vs-code-prettier-eslint"
+  ]
+}
