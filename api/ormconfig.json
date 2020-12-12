@@ -6,7 +6,7 @@
     "port": 5432,
     "username": "postgres",
     "password": "password",
-    "database": "typegraphql-boilerplate",
+    "database": "stevenhansel-dev",
     "synchronize": true,
     "logging": true,
     "entities": ["src/database/entity/**/*.*"]
@@ -18,7 +18,7 @@
     "port": 5432,
     "username": "postgres",
     "password": "password",
-    "database": "typegraphql-prod",
+    "database": "stevenhansel-prod",
     "synchronize": true,
     "logging": false,
     "entities": ["src/database/entity/**/*.*"]
@@ -29,7 +29,7 @@
     "host": "localhost",
     "username": "postgres",
     "password": "password",
-    "database": "typegraphql-test-boilerplate",
+    "database": "stevenhansel-test",
     "synchronize": true,
     "logging": false,
     "dropSchema": true,
