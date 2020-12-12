@@ -1,0 +1,42 @@
+version: '3.7'
+
+services:
+  api:
+    build: .
+    ports:
+      - 8080
+    networks:
+      - net
+    depends_on:
+      - database
+      - redis_session
+
+  database:
+    container_name: 'postgres'
+    image: 'postgres'
+    networks:
+      - net
+    ports:
+      - 5432
+    environment:
+      POSTGRES_DB: $DB_NAME
+      POSTGRES_USER: $DB_USERNAME
+      POSTGRES_PASSWORD: $DB_PASSWORD
+      PG_DATA: /var/lib/postgresql/data
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+  
+  redis_session:
+    container_name: 'redis_session'
+    image: 'redis'
+    networks:
+      - net
+    ports:
+      - 6379
+
+networks:
+  net:
+    driver: bridge
+
+volumes:
+  pgdata:

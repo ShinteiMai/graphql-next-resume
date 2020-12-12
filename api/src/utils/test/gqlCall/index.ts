@@ -1,0 +1,1 @@
+export { gqlCall } from "./gqlCall";
