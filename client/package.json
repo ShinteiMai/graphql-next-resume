@@ -3,10 +3,11 @@
   "version": "1.0.0",
   "scripts": {
     "dev": "next",
-    "build": "next build && next export",
     "start": "next start",
     "clean": "next clean",
     "test": "jest --watch",
+    "build": "next build",
+    "postbuild": "next-on-netlify",
     "integration": "cypress open",
     "type-check": "tsc"
   },
