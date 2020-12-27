@@ -1,0 +1,24 @@
+.container {
+  @apply w-full lg:w-8/12
+   mt-0 md:mt-4 lg:mt-6;
+}
+
+.subContainer {
+  @apply mt-8;
+}
+
+.technologyContainer {
+  @apply grid grid-cols-4 lg:grid-cols-8 mt-4 gap-y-6;
+}
+
+.header {
+  @apply text-xl font-medium;
+}
+
+.paragraph {
+  @apply mt-3;
+}
+
+.link {
+  @apply text-primary;
+}

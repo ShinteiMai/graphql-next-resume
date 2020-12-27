@@ -3,8 +3,6 @@ import App from "next/app";
 import "../index.css";
 import Layout from "../components/UI/Layout";
 import { animated, Transition } from "react-spring";
-import Container from "../components/UI/Container";
-import Heading from "../components/UI/Heading";
 import { capitalize } from "../utils/capitalize";
 
 class MyApp extends App {
@@ -31,12 +29,12 @@ class MyApp extends App {
     return (
       <>
         <Layout>
-          <Container className="relative">
-            <Heading className="text-5xl font-medium hidden lg:block">
+          <div className="relative">
+            <h1 className="text-5xl font-medium hidden lg:block">
               {this.props.router.pathname.slice(1) === ""
                 ? "About"
                 : capitalize(this.props.router.pathname.slice(1))}
-            </Heading>
+            </h1>
             <Transition
               items={items}
               keys={(item) => item.id}
@@ -62,7 +60,7 @@ class MyApp extends App {
                 </animated.div>
               )}
             </Transition>
-          </Container>
+          </div>
         </Layout>
 
         <style jsx global>

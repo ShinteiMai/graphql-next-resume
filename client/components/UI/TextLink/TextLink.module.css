@@ -1,0 +1,6 @@
+.default {
+  @apply no-underline cursor-pointer;
+}
+.newTab {
+  @apply no-underline cursor-pointer transition-all duration-200 ease-in-out;
+}

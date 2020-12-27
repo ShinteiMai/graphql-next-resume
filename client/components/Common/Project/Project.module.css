@@ -1,0 +1,27 @@
+.container {
+  @apply block lg:flex justify-between;
+}
+
+.projectContainer {
+  @apply flex flex-col ml-0 lg:ml-6 mt-3 lg:mt-0;
+}
+
+.headingContainer {
+  @apply flex justify-between items-center mb-3;
+}
+
+.title {
+  @apply text-2xl font-medium lg:mb-0;
+}
+
+.technology {
+  @apply flex items-center;
+}
+
+.description {
+  @apply block mb-4 lg:mb-0;
+}
+
+.links {
+  @apply w-24 mt-0 md:mt-3 lg:mt-auto;
+}

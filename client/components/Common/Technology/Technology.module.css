@@ -1,0 +1,16 @@
+.container {
+  @apply text-center flex flex-col items-center;
+}
+
+.img {
+  @apply cursor-pointer transform hover:-translate-y-1 transition-all
+   duration-200 ease-in-out;
+}
+
+.imgActive {
+  @apply -translate-y-1;
+}
+
+.link {
+  @apply mt-auto text-xs text-primary;
+}
