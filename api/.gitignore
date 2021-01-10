@@ -1,9 +1,0 @@
-# General
-dist
-node_modules
-images/*
-
-# Env Files
-.env.development
-.env.production
-.env.test
