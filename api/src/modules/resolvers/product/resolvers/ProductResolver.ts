@@ -9,7 +9,7 @@ import {
   Mutation,
   Query,
   Resolver,
-  UseMiddleware,
+  UseMiddleware
 } from "type-graphql";
 import { ProductInput } from "../input/ProductInput";
 
@@ -33,7 +33,7 @@ export class ProductResolver {
     @Arg("data") data: ProductInput,
     @Ctx() ctx: Context
   ): Promise<Product | void> {
-    const userId = ctx.req.session?.userId;
+    const userId = ctx.request.session?.userId;
     if (!userId) {
       return Errors.UnauthorizedException();
     }
@@ -48,7 +48,7 @@ export class ProductResolver {
     @Arg("data") data: ProductInput,
     @Ctx() ctx: Context
   ): Promise<Product | void> {
-    const userId = ctx.req.session?.userId;
+    const userId = ctx.request.session?.userId;
     if (!userId) {
       return Errors.UnauthorizedException();
     }

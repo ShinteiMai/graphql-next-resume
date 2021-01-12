@@ -1,9 +1,9 @@
 import Container from "typedi";
 import {
   BaseEntity,
-
-
-  ConnectionOptions, createConnection, useContainer
+  ConnectionOptions,
+  createConnection,
+  useContainer
 } from "typeorm";
 
 interface TypeORMEnvironmentOptions {
@@ -47,6 +47,7 @@ const createTypeORMConnection = (): ConnectionOptions => {
 
 export const setupTypeORMConnection = async () => {
   useContainer(Container);
+
   const options: ConnectionOptions = createTypeORMConnection();
   const connection = await createConnection(options);
   BaseEntity.useConnection(connection);

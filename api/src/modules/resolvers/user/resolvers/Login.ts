@@ -2,7 +2,7 @@ import { User } from "@db/entity";
 import { Errors } from "@tools/errors";
 import { Context } from "@tools/types";
 import * as argon2 from "argon2";
-import { Mutation, Arg, Ctx, Resolver } from "type-graphql";
+import { Arg, Ctx, Mutation, Resolver } from "type-graphql";
 import { LoginInput } from "../input/LoginInput";
 
 @Resolver()
@@ -27,7 +27,7 @@ export class LoginResolver {
       return Errors.UnauthorizedException("User is not confirmed");
     }
 
-    ctx.req.session!.userId = user.id;
+    ctx.request.session!.userId = user.id;
     return user;
   }
 }

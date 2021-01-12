@@ -1,4 +1,3 @@
-import "reflect-metadata";
 import { ProductResolver } from "@modules/resolvers/product";
 import {
   ChangePasswordResolver,
@@ -7,9 +6,9 @@ import {
   LoginResolver,
   LogoutResolver,
   MeResolver,
-  ProfilePictureResolver,
-  RegisterResolver,
+  RegisterResolver
 } from "@modules/resolvers/user";
+import "reflect-metadata";
 import { buildSchema } from "type-graphql";
 import Container from "typedi";
 
@@ -26,7 +25,6 @@ export const createSchema = () => {
       ConfirmUserResolver,
       ForgotPasswordResolver,
       ChangePasswordResolver,
-      ProfilePictureResolver,
       LogoutResolver,
     ],
     container: Container,
