@@ -2,7 +2,6 @@ import { TComponent } from "@components/types";
 import { TextLink } from "@components/UI";
 import clsx from "clsx";
 import React, { useState } from "react";
-import Trail from "../Trail";
 
 interface Props extends TComponent {
   detailed?: boolean;
@@ -50,13 +49,6 @@ const Technology = ({
         }}
         onClick={() => setIsActivated(!isActivated)}
       />
-      {detailed && (
-        <Trail open={showTitle}>
-          <TextLink newTab href={link} className="mt-auto text-xs text-primary">
-            @{title}
-          </TextLink>
-        </Trail>
-      )}
     </div>
   );
 };
