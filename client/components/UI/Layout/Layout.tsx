@@ -11,6 +11,8 @@ const Layout = ({ children }: Props) => {
       <Head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+
+        {/* SEO & Meta Tags */}
         <title>Steven Hansel</title>
         <link rel="shortcut icon" href="/images/typescript.png" />
         <meta name="title" content="Steven Hansel" />
@@ -41,6 +43,44 @@ const Layout = ({ children }: Props) => {
         <meta
           property="twitter:image"
           content="https://stevenhansel.s3-ap-southeast-1.amazonaws.com/profile.png"
+        />
+
+        {/* Fonts */}
+        <link
+          rel="preload"
+          href="/fonts/poppins/Poppins-Regular.ttf"
+          as="font"
+          crossOrigin=""
+        />
+        <link
+          rel="preload"
+          href="/fonts/poppins/Poppins-Medium.ttf"
+          as="font"
+          crossOrigin=""
+        />
+        <link
+          rel="preload"
+          href="/fonts/poppins/Poppins-SemiBold.ttf"
+          as="font"
+          crossOrigin=""
+        />
+        <link
+          rel="preload"
+          href="/fonts/poppins/Poppins-Bold.ttf"
+          as="font"
+          crossOrigin=""
+        />
+        <link
+          rel="preload"
+          href="/fonts/poppins/Poppins-ExtraBold.ttf"
+          as="font"
+          crossOrigin=""
+        />
+        <link
+          rel="preload"
+          href="/fonts/poppins/Poppins-Black.ttf"
+          as="font"
+          crossOrigin=""
         />
       </Head>
       <div className="flex flex-col lg:flex-row px-2 sm:px-12 md:px-24 py-6 md:py-12 lg:py-24 max-w-7xl mx-auto">
