@@ -50,6 +50,8 @@ module.exports = {
         "accents-1": "#CACACA",
         "accents-2": "#E9E9E9",
       },
+      maxWidth: {
+      }
     },
   },
 };

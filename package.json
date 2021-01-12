@@ -1,0 +1,14 @@
+{
+    "private": true,
+    "workspaces": [
+      "api",
+      "client"
+    ],
+    "scripts": {
+      "dev-client": "cd client && yarn dev",
+      "build-client": "cd client && yarn build",
+      "start-client": "cd client && yarn start",
+      "test-client": "cd client && yarn test",
+      "dev-api": "cd api && yarn dev"
+    }
+  }
