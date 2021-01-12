@@ -1,0 +1,7 @@
+# General
+dist
+node_modules
+images/*
+
+# Env Files
+.env

@@ -9,11 +9,13 @@ import connectRedis from "connect-redis";
 import { ApolloServer } from "apollo-server-express";
 import { graphqlUploadExpress } from "graphql-upload";
 import { createSchema, redis, setupTypeORMConnection } from "@utils/main";
+import { ApolloServerLoaderPlugin } from "type-graphql-dataloader";
+import { getConnection } from "typeorm";
 
 const main = async () => {
   /** 0. ENV & Database Setup */
   dotenv.config({
-    path: path.join(__dirname + `/../.env.${process.env.NODE_ENV}`),
+    path: path.join(__dirname + `/../.env`),
   });
   await setupTypeORMConnection();
 
@@ -25,6 +27,12 @@ const main = async () => {
     uploads: false,
     debug: !(process.env.NODE_ENV === "production"),
     playground: true,
+    introspection: true,
+    plugins: [
+      ApolloServerLoaderPlugin({
+        typeormGetConnection: getConnection,
+      }),
+    ],
   });
 
   const app = Express();
@@ -68,9 +76,9 @@ const main = async () => {
   apolloServer.applyMiddleware({ app, cors: false, path: "/graphql" });
   app.listen(process.env.PORT || 8080, () => {
     console.log(
-      `🚀 GraphQL API started on http://localhost:${
+      `🚀 Freshproduce GraphQL API has started on http://localhost:${
         process.env.PORT || 8080
-      }`
+      }/graphql`
     );
   });
 };

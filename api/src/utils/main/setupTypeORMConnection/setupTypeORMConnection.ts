@@ -1,9 +1,53 @@
-import { BaseEntity, createConnection, getConnectionOptions } from "typeorm";
+import Container from "typedi";
+import {
+  BaseEntity,
 
-export const setupTypeORMConnection = async (name?: string) => {
-  const options = await getConnectionOptions(
-    name || process.env.NODE_ENV || "test"
-  );
+
+  ConnectionOptions, createConnection, useContainer
+} from "typeorm";
+
+interface TypeORMEnvironmentOptions {
+  database: string;
+  logging: boolean;
+}
+
+const createTypeORMConnection = (): ConnectionOptions => {
+  let environmentOptions: TypeORMEnvironmentOptions = {
+    database: "stevenhansel",
+    logging: true,
+  };
+  switch (process.env.NODE_ENV) {
+    case "test":
+      environmentOptions = {
+        database: "stevenhansel-test",
+        logging: false,
+      };
+      break;
+    case "production":
+      environmentOptions = {
+        database: "stevenhansel-prod",
+        logging: false,
+      };
+      break;
+    default:
+      break;
+  }
+  return {
+    name: "default",
+    type: "postgres",
+    host: process.env.NODE_ENV === "production" ? "database" : "localhost",
+    port: 5432,
+    username: "postgres",
+    password: "password",
+    synchronize: true,
+    entities: ["src/database/entity/**/*.*"],
+    ...environmentOptions,
+  };
+};
+
+export const setupTypeORMConnection = async () => {
+  useContainer(Container);
+  const options: ConnectionOptions = createTypeORMConnection();
   const connection = await createConnection(options);
   BaseEntity.useConnection(connection);
   return connection;

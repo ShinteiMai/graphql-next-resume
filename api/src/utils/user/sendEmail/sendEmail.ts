@@ -25,7 +25,7 @@ export const sendEmail = async (email: string, url: string) => {
 
   if (
     process.env.NODE_ENV === "test" ||
-    process.env.NODE_ENV === "developoment"
+    process.env.NODE_ENV === "development"
   ) {
     console.log("Preview url: ", nodemailer.getTestMessageUrl(info));
   }

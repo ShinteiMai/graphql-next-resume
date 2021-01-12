@@ -1,3 +1,5 @@
+import "reflect-metadata";
+import { ProductResolver } from "@modules/resolvers/product";
 import {
   ChangePasswordResolver,
   ConfirmUserResolver,
@@ -7,8 +9,9 @@ import {
   MeResolver,
   ProfilePictureResolver,
   RegisterResolver,
-} from "@modules/user";
+} from "@modules/resolvers/user";
 import { buildSchema } from "type-graphql";
+import Container from "typedi";
 
 /**
  * This will build all the GraphQL Schema based on all resolvers under the src/modules/* folder
@@ -16,6 +19,7 @@ import { buildSchema } from "type-graphql";
 export const createSchema = () => {
   return buildSchema({
     resolvers: [
+      ProductResolver,
       LoginResolver,
       RegisterResolver,
       MeResolver,
@@ -25,6 +29,7 @@ export const createSchema = () => {
       ProfilePictureResolver,
       LogoutResolver,
     ],
+    container: Container,
     authChecker: ({ context: { req } }) => {
       return !!req.session.userId;
     },

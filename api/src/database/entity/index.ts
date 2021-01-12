@@ -1,1 +1,2 @@
-export { User } from "./User";
+export { User } from "./entities/User";
+export { Product } from "./entities/Product";

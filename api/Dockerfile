@@ -14,5 +14,6 @@ COPY . .
 
 # 4.  Run the server
 EXPOSE 8080
+RUN yarn build
 CMD ["yarn", "start"]
 
