@@ -1,7 +1,26 @@
-version: '3.7'
+version: "3.7"
 
 services:
+  nginx:
+    container_name: nginx
+    image: nginx:alpine
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+    expose:
+      - 80
+      - 443
+    ports:
+      - 80:80
+      - 443:443
+    networks:
+      - net
+    depends_on:
+      - api
+      - database
+      - redis_session
+
   api:
+    container_name: api
     build: .
     ports:
       - 8080
@@ -12,23 +31,23 @@ services:
       - redis_session
 
   database:
-    container_name: 'postgres'
-    image: 'postgres'
+    container_name: database
+    image: postgres
     networks:
       - net
     ports:
       - 5432
     environment:
-      POSTGRES_DB: $DB_NAME
-      POSTGRES_USER: $DB_USERNAME
-      POSTGRES_PASSWORD: $DB_PASSWORD
-      PG_DATA: /var/lib/postgresql/data
+      - POSTGRES_DB=freshproduce-prod
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=password
+      - PG_DATA=/var/lib/postgresql/data
     volumes:
       - pgdata:/var/lib/postgresql/data
-  
+
   redis_session:
-    container_name: 'redis_session'
-    image: 'redis'
+    container_name: redis_session
+    image: redis
     networks:
       - net
     ports:

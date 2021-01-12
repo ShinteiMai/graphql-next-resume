@@ -26,7 +26,8 @@
       "@utils/*": ["src/utils/*"],
       "@db/*": ["src/database/*"],
       "@modules/*": ["src/modules/*"],
-      "@tools/*": ["src/tools/*"]
+      "@tools/*": ["src/tools/*"],
+      "@services/*": ["src/modules/services/*"]
     }
   },
   "exclude": ["node_modules"],

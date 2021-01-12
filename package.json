@@ -9,6 +9,9 @@
       "build-client": "cd client && yarn build",
       "start-client": "cd client && yarn start",
       "test-client": "cd client && yarn test",
-      "dev-api": "cd api && yarn dev"
+      "integration-client": "cd client && yarn integration",
+      "dev-api": "cd api && yarn dev",
+      "build-api": "cd api && yarn build",
+      "start-api": "cd api && yarn start"
     }
   }

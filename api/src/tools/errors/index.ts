@@ -1,4 +1,4 @@
-import { ApolloError } from "apollo-server-express";
+import { ApolloError } from "apollo-server-fastify";
 
 /** This were inspired by NestJS built-in HTTP Exceptions (Error Handling) */
 class GraphQLErrors {
