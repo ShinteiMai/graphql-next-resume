@@ -2,7 +2,7 @@ import Button from "../components/UI/Button";
 
 const ContactPage = () => {
   return (
-    <div className="w-full lg:w-8/12">
+    <div>
       <h2 className="mt-0 md:mt-6 mb-2 text-2xl font-medium text-accents-2">
         Get in Touch
       </h2>

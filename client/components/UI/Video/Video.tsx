@@ -14,7 +14,7 @@ const Video = ({ src, className }: Props) => {
   return (
     <video
       preload="metadata"
-      className={clsx("w-full lg:w-96 cursor-pointer", className)}
+      className={clsx("w-full lg:w-84 cursor-pointer", className)}
       loop
       onMouseOver={(e: React.MouseEvent<HTMLVideoElement, MouseEvent>) =>
         e.currentTarget.play()
