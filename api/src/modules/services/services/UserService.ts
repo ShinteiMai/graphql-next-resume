@@ -64,6 +64,7 @@ export class UserService {
       await this.userRepository
         .createQueryBuilder("user")
         .where("user.email = :email", { email })
+        .getOne()
     )
       throw new Errors(
         "ConflictException",

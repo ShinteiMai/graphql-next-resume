@@ -22,12 +22,12 @@ export const gqlCall = async ({ source, variableValues, userId }: Options) => {
     source,
     variableValues,
     contextValue: {
-      req: {
+      request: {
         session: {
           userId,
         },
       },
-      res: {
+      reply: {
         clearCookie: jest.fn(),
       },
     },
