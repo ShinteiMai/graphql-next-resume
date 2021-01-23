@@ -1,8 +1,8 @@
-export { ChangePasswordResolver } from "./resolvers/ChangePassword";
-export { ConfirmUserResolver } from "./resolvers/ConfirmUser";
-export { ForgotPasswordResolver } from "./resolvers/ForgotPassword";
-export { LoginResolver } from "./resolvers/Login";
-export { LogoutResolver } from "./resolvers/Logout";
-export { MeResolver } from "./resolvers/Me";
-export { RegisterResolver } from "./resolvers/Register";
+/** Resolvers */
+export { AuthResolver } from "./resolvers/AuthResolver";
+export { UserResolver } from "./resolvers/UserResolver";
 
+/** Inputs */
+export { RegisterInput } from "./input/RegisterInput";
+export { LoginInput } from "./input/LoginInput";
+export { ChangePasswordInput } from "./input/ChangePasswordInput";

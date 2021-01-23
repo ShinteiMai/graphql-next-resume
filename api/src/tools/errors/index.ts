@@ -1,54 +1,30 @@
 import { ApolloError } from "apollo-server-fastify";
 
+// type MappedType<K, T> = {[K in keyof T]: {key: K, value: T[K]}}[keyof T];
+type TErrors =
+  | "NotFoundException"
+  | "UnauthorizedException"
+  | "InternalServerErrorException"
+  | "RequestTimeoutException"
+  | "ForbiddenException"
+  | "ConflictException";
+
+type TResponse = {
+  [key in TErrors]: [string, string];
+};
+
 /** This were inspired by NestJS built-in HTTP Exceptions (Error Handling) */
-class GraphQLErrors {
-  /** If resource was not found in the database   */
-  NotFoundException(message?: string) {
-    throw new ApolloError(
-      message || "Resource was not found",
-      "NOT_FOUND_EXCEPTION"
-    );
-  }
+const responses: TResponse = {
+  NotFoundException: ["Resource was not found", "NOT_FOUND_EXCEPTION"],
+  UnauthorizedException: ["You don't have the required permission", "UNAUTHORIZED_EXCEPTION"],
+  InternalServerErrorException: ["An internal server error has happened", "INTERNAL_SERVER_ERROR_EXCEPTION"],
+  RequestTimeoutException: ["Request Timeout", "REQUEST_TIMEOUT_EXCEPTION"],
+  ConflictException: ["A Conflict Happened", "CONFLICT_EXCEPTION"],
+  ForbiddenException: ["Forbidden Request", "FORBIDDEN_EXCEPTION"]
+};
 
-  /** If user tried to access restricted  */
-  UnauthorizedException(message?: string) {
-    throw new ApolloError(
-      message || "You don't have the required permission",
-      "UNAUTHORIZED_EXCEPTION"
-    );
-  }
-
-  /** If an internal server error has happened  */
-  InternalServerErrorException(message?: string) {
-    throw new ApolloError(
-      message || "An internal server error has happened",
-      "INTERNAL_SERVER_ERROR_EXCEPTION"
-    );
-  }
-
-  /** If there is a timeout error */
-  RequestTimeoutException(message?: string) {
-    throw new ApolloError(
-      message || "Request timeout",
-      "REQUEST_TIMEOUT_EXCEPTION"
-    );
-  }
-
-  /** If there is a conflict */
-  ConflictException(message?: string) {
-    throw new ApolloError(
-      message || "A conflict happened",
-      "CONFLICT_EXCEPTION"
-    );
-  }
-
-  /** If requested request is forbidden */
-  ForbiddenException(message?: string) {
-    throw new ApolloError(
-      message || "Forbidden Request",
-      "FORBIDDEN_EXCEPTION"
-    );
+export class Errors extends ApolloError {
+  constructor(type: TErrors, customMessage?: string) {
+    super(!customMessage ? responses[type][0] : customMessage, type);
   }
 }
-
-export const Errors = new GraphQLErrors();

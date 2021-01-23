@@ -3,12 +3,10 @@ import {
   PrimaryGeneratedColumn,
   Column,
   BaseEntity,
-  OneToMany,
-  RelationId,
+  BeforeInsert,
 } from "typeorm";
 import { ObjectType, Field, ID, Root } from "type-graphql";
-import { Product } from "./Product";
-import { TypeormLoader } from "type-graphql-dataloader";
+import * as argon2 from "argon2";
 
 @ObjectType()
 @Entity()
@@ -36,16 +34,23 @@ export class User extends BaseEntity {
   @Column("bool", { default: false })
   confirmed: boolean;
 
-  @Field(() => [Product])
-  @OneToMany(() => Product, (product) => product.owner)
-  @TypeormLoader(() => Product, (user: User) => user.productIds)
-  products: Product[];
+  // @Field(() => [Product])
+  // @OneToMany(() => Product, (product) => product.owner)
+  // @TypeormLoader(() => Product, (user: User) => user.productIds)
+  // products: Product[];
 
-  @RelationId((user: User) => user.products)
-  productIds: number[];
+  // @RelationId((user: User) => user.products)
+  // productIds: number[];
 
   @Field()
   name(@Root() parent: User): string {
     return `${parent.firstName} ${parent.lastName}`;
+  }
+
+  @BeforeInsert()
+  async hashPassword() {
+    if (this.password) {
+      this.password = await argon2.hash(this.password);
+    }
   }
 }

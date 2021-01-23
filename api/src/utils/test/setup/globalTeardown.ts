@@ -3,10 +3,10 @@ import { setupTypeORMConnection } from "@utils/main";
 import { getConnection } from "typeorm";
 
 export default async function (): Promise<void> {
-  const conn = await setupTypeORMConnection("test");
-  const entities = getConnection("test").entityMetadatas;
+  const conn = await setupTypeORMConnection();
+  const entities = getConnection().entityMetadatas;
   for (const entity of entities) {
-    const repository = getConnection("test").getRepository(entity.name); // Get repository
+    const repository = getConnection().getRepository(entity.name); // Get repository
     await repository.clear(); // Clear each entity table's content
   }
   await conn.close();
