@@ -1,3 +1,5 @@
-# stevenhansel.com
+# graphql-next-resume
 
-my personal site containing my biography, projects, and a personal blog.
+## Work In Progress [WIP]
+
+Resume site supported with CMS powered by GraphQL and Next.js

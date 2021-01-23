@@ -58,7 +58,7 @@ const main = async () => {
 
   /** 3. Running the Apollo Server */
   console.log(
-    `🚀 Freshproduce GraphQL API has started on http://localhost:${
+    `🚀 GraphQL API has started on http://localhost:${
       process.env.PORT || 8080
     }/graphql`
   );

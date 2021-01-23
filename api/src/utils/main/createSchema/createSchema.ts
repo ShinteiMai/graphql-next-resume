@@ -1,14 +1,6 @@
 import "reflect-metadata";
 import { ProfileResolver } from "@modules/resolvers/profile";
-import {
-  ChangePasswordResolver,
-  ConfirmUserResolver,
-  ForgotPasswordResolver,
-  LoginResolver,
-  LogoutResolver,
-  MeResolver,
-  RegisterResolver
-} from "@modules/resolvers/user";
+import { AuthResolver, UserResolver } from "@modules/resolvers/user";
 import { buildSchema } from "type-graphql";
 import Container from "typedi";
 
@@ -17,16 +9,7 @@ import Container from "typedi";
  */
 export const createSchema = () => {
   return buildSchema({
-    resolvers: [
-      ProfileResolver,
-      LoginResolver,
-      RegisterResolver,
-      MeResolver,
-      ConfirmUserResolver,
-      ForgotPasswordResolver,
-      ChangePasswordResolver,
-      LogoutResolver,
-    ],
+    resolvers: [ProfileResolver, UserResolver, AuthResolver],
     container: Container,
     authChecker: ({ context: { req } }) => {
       return !!req.session.userId;

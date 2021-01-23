@@ -1,8 +1,11 @@
 import { Profile } from "@db/entity";
 import { ProfileInput } from "@modules/resolvers/profile";
+import { Errors } from "@tools/errors";
+import { Service } from "typedi";
 import { Repository } from "typeorm";
 import { InjectRepository } from "typeorm-typedi-extensions";
 
+@Service()
 export class ProfileService {
   constructor(
     @InjectRepository(Profile)
@@ -21,8 +24,17 @@ export class ProfileService {
       .createQueryBuilder("profile")
       .where("profile.id = :id", { id })
       .getOne();
-    if (!profile) throw new Error();
+    if (!profile) throw new Errors("NotFoundException");
     return profile;
+  }
+
+  async findActiveProfile(): Promise<Profile> {
+    const activeProfile = await this.profileRepository
+      .createQueryBuilder("profile")
+      .where("profie.isActive = :isActive", { isActive: true })
+      .getOne();
+    if (!activeProfile) throw new Errors("NotFoundException");
+    return activeProfile;
   }
 
   async create({
