@@ -7,14 +7,14 @@ import { Mutation, Arg, Resolver } from "type-graphql";
 @Resolver()
 export class ConfirmUserResolver {
   @Mutation(() => Boolean)
-  async confirmUser(@Arg("token") token: string): Promise<Boolean | void> {
+  async confirmUser(@Arg("token") token: string): Promise<boolean> {
     const userId = await redis.get(confirmUserPrefix + token);
-    if (!userId) return Errors.NotFoundException();
+    if (!userId) throw new Errors("NotFoundException");
 
     try {
       await User.update({ id: userId }, { confirmed: true });
     } catch (err) {
-      return Errors.InternalServerErrorException();
+      throw new Errors("InternalServerErrorException");
     }
 
     await redis.del(token);

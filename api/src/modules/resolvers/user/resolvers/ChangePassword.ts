@@ -13,28 +13,28 @@ export class ChangePasswordResolver {
   @Mutation(() => User, { nullable: true })
   async changePassword(
     @Arg("data") { token, password }: ChangePasswordInput
-  ): Promise<User | void> {
+  ): Promise<User> {
     const userId = await redis.get(forgotPasswordPrefix + token);
     if (!userId) {
-      return Errors.UnauthorizedException();
+      throw new Errors("UnauthorizedException");
     }
 
     const user = await User.findOne(userId);
     if (!user) {
-      return Errors.NotFoundException();
+      throw new Errors("NotFoundException");
     }
 
     try {
       await redis.del(forgotPasswordPrefix + token);
     } catch (err) {
-      return Errors.InternalServerErrorException();
+      throw new Errors("InternalServerErrorException");
     }
 
     user.password = await argon2.hash(password);
     try {
       await user.save();
     } catch (err) {
-      return Errors.InternalServerErrorException();
+      throw new Errors("InternalServerErrorException");
     }
 
     return user;

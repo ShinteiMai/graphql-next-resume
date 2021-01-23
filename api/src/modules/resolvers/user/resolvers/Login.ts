@@ -11,23 +11,25 @@ export class LoginResolver {
   async login(
     @Arg("data") { email, password }: LoginInput,
     @Ctx() ctx: Context
-  ): Promise<User | void> {
+  ): Promise<User> {
     const user = await User.findOne({ where: { email } });
 
     if (!user) {
-      return Errors.NotFoundException("User not found");
+      throw new Errors("NotFoundException");
     }
 
     const isValid = await argon2.verify(user.password, password);
-    if (!isValid) {
-      return Errors.UnauthorizedException("Authentication Error");
-    }
+    if (!isValid)
+      throw new Errors(
+        "UnauthorizedException",
+        "Authentication failed, email or password is invalid"
+      );
 
-    if (!user.confirmed) {
-      return Errors.UnauthorizedException("User is not confirmed");
-    }
+    if (!user.confirmed)
+      throw new Errors("UnauthorizedException", "User is not confirmed");
 
-    ctx.request.session!.userId = user.id;
+    ctx.request.session.userId = user.id;
+
     return user;
   }
 }

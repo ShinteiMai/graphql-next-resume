@@ -8,8 +8,7 @@ export class LogoutResolver {
   @Mutation(() => Boolean)
   async logout(@Ctx() ctx: Context): Promise<boolean> {
     return new Promise((res, rej) => {
-      const contextRequest: any = ctx.request;
-      contextRequest.destroySession((err: Error | undefined) => {
+      ctx.request.destroySession((err: Error | undefined) => {
         if (err) {
           console.log(err);
           return rej(false);

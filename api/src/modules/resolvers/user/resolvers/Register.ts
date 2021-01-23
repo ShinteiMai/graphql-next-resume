@@ -11,11 +11,11 @@ export class RegisterResolver {
   async register(
     @Arg("data") { email, firstName, lastName, password }: RegisterInput
   ): Promise<User | void> {
-    if (await User.findOne({ email })) {
-      return Errors.ConflictException(
+    if (await User.findOne({ email }))
+      throw new Errors(
+        "ConflictException",
         "User with the requested email already exists"
       );
-    }
 
     const user = new User();
     user.firstName = firstName;
@@ -26,7 +26,7 @@ export class RegisterResolver {
     try {
       await user.save();
     } catch (err) {
-      return Errors.InternalServerErrorException();
+      throw new Errors("InternalServerErrorException");
     }
 
     await sendEmail(email, await createConfirmationUrl(user.id));

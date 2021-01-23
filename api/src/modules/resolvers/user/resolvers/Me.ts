@@ -10,9 +10,7 @@ export class MeResolver {
   @Query(() => User, { nullable: true })
   async me(@Ctx() ctx: Context): Promise<User | void> {
     const userId = ctx.request.session?.userId;
-    if (!userId) {
-      return Errors.UnauthorizedException();
-    }
+    if (!userId) throw new Errors("UnauthorizedException");
 
     return await User.findOne(userId);
   }

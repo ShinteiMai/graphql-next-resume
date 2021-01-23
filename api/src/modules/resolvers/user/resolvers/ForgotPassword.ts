@@ -8,10 +8,11 @@ import { v4 as uuid } from "uuid";
 @Resolver()
 export class ForgotPasswordResolver {
   @Mutation(() => Boolean)
-  async forgotPassword(@Arg("email") email: string): Promise<boolean | void> {
+  async forgotPassword(@Arg("email") email: string): Promise<boolean> {
     const user = await User.findOne({ where: { email } });
     if (!user)
-      return Errors.NotFoundException(
+      throw new Errors(
+        "NotFoundException",
         `User with the email of ${email} was not found`
       );
 
