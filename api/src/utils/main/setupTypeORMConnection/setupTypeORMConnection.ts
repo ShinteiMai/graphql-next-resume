@@ -3,7 +3,7 @@ import {
   BaseEntity,
   ConnectionOptions,
   createConnection,
-  useContainer
+  useContainer,
 } from "typeorm";
 
 interface TypeORMEnvironmentOptions {
@@ -11,7 +11,10 @@ interface TypeORMEnvironmentOptions {
   logging: boolean;
 }
 
-const createTypeORMConnection = (): ConnectionOptions => {
+const createTypeORMConnection = (): ConnectionOptions & {
+  seeds: string[];
+  factories: string[];
+} => {
   let environmentOptions: TypeORMEnvironmentOptions = {
     database: "stevenhansel",
     logging: true,
@@ -41,6 +44,8 @@ const createTypeORMConnection = (): ConnectionOptions => {
     password: "password",
     synchronize: true,
     entities: ["src/database/entity/**/*.*"],
+    seeds: ["src/database/seeds/**/*{.ts,.js}"],
+    factories: ["src/database/factories/**/*{.ts,.js}"],
     ...environmentOptions,
   };
 };

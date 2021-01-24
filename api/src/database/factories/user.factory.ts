@@ -1,4 +1,4 @@
-import { User } from "@db/entity";
+import { User } from "../entity";
 import * as Faker from "faker";
 import { define } from "typeorm-seeding";
 

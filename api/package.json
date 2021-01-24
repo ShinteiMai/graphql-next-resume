@@ -14,7 +14,6 @@
     "fastify": "^3.9.2",
     "fastify-cookie": "^5.1.0",
     "fastify-cors": "^5.1.0",
-    "fastify-secure-session": "^2.3.0",
     "fastify-session": "^5.2.1",
     "graphql": "^15.4.0",
     "ioredis": "^4.19.4",
@@ -61,8 +60,8 @@
     "deploy": "docker-compose --env-file .env.production up --build -d",
     "test:db": "NODE_ENV=test ts-node ./src/utils/test/setup/dbSetup.ts",
     "test": "NODE_ENV=test npm run test:db && jest --forceExit --detectOpenHandles",
-    "seed:config": "NODE_ENV=test ts-node ./node_modules/typeorm-seeding/dist/cli.js config --connection test",
-    "seed:run": "NODE_ENV=test ts-node ./node_modules/typeorm-seeding/dist/cli.js seed --connection test",
+    "seed:config": "ts-node ../node_modules/typeorm-seeding/dist/cli.js config",
+    "seed:run": "ts-node ../node_modules/typeorm-seeding/dist/cli.js seed",
     "seed:drop": "ts-node ./node_modules/typeorm/cli.js schema:drop --connection test",
     "seed:sync": "ts-node ./node_modules/typeorm/cli.js schema:sync --connection test"
   }
