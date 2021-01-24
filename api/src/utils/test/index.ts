@@ -1,1 +1,1 @@
-export { gqlCall } from "./gqlCall";
+export { gqlCall } from "./src/gqlCall";

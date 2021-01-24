@@ -1,15 +1,36 @@
 import { Profile } from "@db/entity";
 import { ProfileService } from "@modules/services";
-import { Arg, Mutation, Query, Resolver } from "type-graphql";
+import { QueryOptionsInput } from "@modules/shared/input";
+import { PaginationCursor } from "@modules/shared/objectTypes";
+import { PaginationResult } from "@tools/types";
+import {
+  Arg,
+  Field,
+  Mutation,
+  ObjectType,
+  Query,
+  Resolver,
+} from "type-graphql";
 import { ProfileInput } from "../input/ProfileInput";
+
+@ObjectType()
+export class ProfilePaginated {
+  @Field(() => [Profile])
+  data: Profile[];
+
+  @Field()
+  cursor: PaginationCursor;
+}
 
 @Resolver(() => Profile)
 export class ProfileResolver {
   constructor(private readonly profileService: ProfileService) {}
 
-  @Query(() => [Profile])
-  async profiles(): Promise<Profile[]> {
-    return await this.profileService.findAll();
+  @Query(() => ProfilePaginated)
+  async profiles(
+    @Arg("query") data: QueryOptionsInput
+  ): Promise<PaginationResult<Profile>> {
+    return await this.profileService.findAll(data);
   }
 
   @Query(() => Profile)

@@ -1,2 +1,2 @@
-export { isAuth } from "./isAuth";
-export { logger } from "./logger";
+export { isAuth } from "./src/isAuth";
+export { logger } from "./src/logger";

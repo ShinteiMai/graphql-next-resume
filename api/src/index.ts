@@ -1,3 +1,4 @@
+import "reflect-metadata";
 import { createSchema, redis, setupTypeORMConnection } from "@utils/main";
 import { ApolloServer } from "apollo-server-fastify";
 import connectRedis from "connect-redis";
@@ -7,7 +8,6 @@ import fastifyCookie from "fastify-cookie";
 import cors from "fastify-cors";
 import fastifySession from "fastify-session";
 import * as path from "path";
-import "reflect-metadata";
 import { ApolloServerLoaderPlugin } from "type-graphql-dataloader";
 import { getConnection } from "typeorm";
 
