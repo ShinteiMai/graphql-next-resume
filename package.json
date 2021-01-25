@@ -11,6 +11,7 @@
       "test-client": "cd client && yarn test",
       "integration-client": "cd client && yarn integration",
       "dev-api": "cd api && yarn dev",
+      "test-api": "cd api && yarn test",
       "build-api": "cd api && yarn build",
       "start-api": "cd api && yarn start"
     }

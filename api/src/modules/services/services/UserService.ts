@@ -1,7 +1,7 @@
 import { User } from "@db/entity";
 import { RegisterInput } from "@modules/resolvers/user/input/RegisterInput";
 import { Errors } from "@tools/errors";
-import { createConfirmationUrl, sendEmail } from "@utils/user";
+import { createConfirmationUrl, sendEmail } from "@utils/helpers";
 import { Service } from "typedi";
 import { Repository } from "typeorm";
 import { InjectRepository } from "typeorm-typedi-extensions";

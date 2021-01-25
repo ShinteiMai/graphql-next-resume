@@ -1,1 +1,0 @@
-export { isAuth } from "./isAuth";

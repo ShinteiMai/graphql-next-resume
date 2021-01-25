@@ -6,7 +6,7 @@ module.exports = {
   port: 5432,
   username: "postgres",
   password: "password",
-  database: "stevenhansel",
+  database: process.env.NODE_ENV === "test" ? "stevenhansel-test" : "stevenhansel",
   synchronize: true,
   logging: false,
   entities: ["src/database/entity/**/*.*"],

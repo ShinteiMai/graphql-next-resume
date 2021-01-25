@@ -7,8 +7,8 @@ import { LoginInput } from "@modules/resolvers/user/input/LoginInput";
 import { v4 as uuid } from "uuid";
 import { redis } from "@utils/main";
 import { confirmUserPrefix, forgotPasswordPrefix } from "@utils/constants";
-import { sendEmail } from "@utils/user";
 import { ChangePasswordInput } from "@modules/resolvers/user";
+import { sendEmail } from "@utils/helpers";
 
 @Service()
 export class AuthService {
