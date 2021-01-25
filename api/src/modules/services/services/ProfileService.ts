@@ -1,5 +1,6 @@
 import { Profile } from "@db/entity";
 import { ProfileInput } from "@modules/resolvers/profile";
+import { FindOneInput } from "@modules/shared/input";
 import { Errors } from "@tools/errors";
 import { CursorParam, PaginationResult, QueryOptions } from "@tools/types";
 import { Pagination } from "@utils/helpers";
@@ -28,8 +29,10 @@ export class ProfileService {
     const profilesQb = this.profileRepository.createQueryBuilder("profile");
     const { escape } = profilesQb.connection.driver;
 
-    if (!!afterCursor) Object.assign(cursors, helper.decode(String(afterCursor)));
-    if (!!beforeCursor) Object.assign(cursors, helper.decode(String(beforeCursor)));
+    if (!!afterCursor)
+      Object.assign(cursors, helper.decode(String(afterCursor)));
+    if (!!beforeCursor)
+      Object.assign(cursors, helper.decode(String(beforeCursor)));
 
     if (Object.keys(cursors).length > 0) {
       profilesQb.andWhere(
@@ -78,12 +81,16 @@ export class ProfileService {
     };
   }
 
-  async findOne(id: string): Promise<Profile> {
+  async findOne({ attribute = "id", query }: FindOneInput): Promise<Profile> {
     const profile = await this.profileRepository
       .createQueryBuilder("profile")
-      .where("profile.id = :id", { id })
+      .where(`profile.${attribute} = :query`, { query })
       .getOne();
-    if (!profile) throw new Errors("NotFoundException");
+    if (!profile)
+      throw new Errors(
+        "NotFoundException",
+        `Profile with the ${attribute} of ${query} was not found`
+      );
     return profile;
   }
 
@@ -92,7 +99,8 @@ export class ProfileService {
       .createQueryBuilder("profile")
       .where("profie.isActive = :isActive", { isActive: true })
       .getOne();
-    if (!activeProfile) throw new Errors("NotFoundException");
+    if (!activeProfile)
+      throw new Errors("NotFoundException", "No active profiles were found");
     return activeProfile;
   }
 
@@ -124,7 +132,11 @@ export class ProfileService {
       .where("profile.id = :id", { id: profileId })
       .getOne();
 
-    if (!profile) throw new Error();
+    if (!profile)
+      throw new Errors(
+        "NotFoundException",
+        `Profile with the id of ${profileId} was not found`
+      );
 
     profile.firstName = data.firstName;
     profile.lastName = data.lastName;
@@ -143,9 +155,19 @@ export class ProfileService {
       .where("profile.id = :id", { id: profileId })
       .getOne();
 
-    if (!profile) throw new Error();
+    if (!profile)
+      throw new Errors(
+        "NotFoundException",
+        `Profile with the id of ${profileId} was not found`
+      );
     const p = Object.assign({}, profile);
-    await this.profileRepository.remove(profile);
+
+    try {
+      await this.profileRepository.remove(profile);
+    } catch (err) {
+      throw new Errors("InternalServerErrorException");
+    }
+
     return p;
   }
 }

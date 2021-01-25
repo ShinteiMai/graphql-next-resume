@@ -17,6 +17,7 @@
     "fastify-session": "^5.2.1",
     "graphql": "^15.4.0",
     "ioredis": "^4.19.4",
+    "jest-extended": "^0.11.5",
     "nodemailer": "^6.4.17",
     "pg": "^8.5.1",
     "reflect-metadata": "^0.1.13",
@@ -59,10 +60,10 @@
     "start": "NODE_ENV=production node -r ts-node/register/transpile-only -r tsconfig-paths/register dist/index.js",
     "deploy": "docker-compose --env-file .env.production up --build -d",
     "test:db": "NODE_ENV=test ts-node ./src/utils/test/setup/dbSetup.ts",
-    "test": "NODE_ENV=test npm run test:db && jest --forceExit --detectOpenHandles",
+    "test": "NODE_ENV=test npm run seed:run && npm run test:db && jest --forceExit --detectOpenHandles",
     "seed:config": "ts-node ../node_modules/typeorm-seeding/dist/cli.js config",
     "seed:run": "ts-node ../node_modules/typeorm-seeding/dist/cli.js seed",
-    "seed:drop": "ts-node ./node_modules/typeorm/cli.js schema:drop --connection test",
-    "seed:sync": "ts-node ./node_modules/typeorm/cli.js schema:sync --connection test"
+    "seed:drop": "NODE_ENV=test ts-node ../node_modules/typeorm/cli.js schema:drop",
+    "seed:sync": "ts-node ../node_modules/typeorm/cli.js schema:sync"
   }
 }
