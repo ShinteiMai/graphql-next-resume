@@ -1,8 +1,11 @@
 import { Profile } from "@db/entity";
-import { ProfileInput } from "@modules/resolvers/profile";
-import { FindOneInput } from "@modules/shared/input";
+import {
+  ProfileInput,
+  QueryProfilesInput,
+  QuerySingleProfileInput,
+} from "@modules/resolvers/profile";
 import { Errors } from "@tools/errors";
-import { CursorParam, PaginationResult, QueryOptions } from "@tools/types";
+import { CursorParam, PaginationResult } from "@tools/types";
 import { Pagination } from "@utils/helpers";
 import { Service } from "typedi";
 import { Brackets, Repository } from "typeorm";
@@ -20,7 +23,7 @@ export class ProfileService {
     order = "ASC",
     afterCursor,
     beforeCursor,
-  }: QueryOptions): Promise<PaginationResult<Profile>> {
+  }: QueryProfilesInput): Promise<PaginationResult<Profile>> {
     const helper = new Pagination(Profile);
     const paginationKeys = ["id" as any];
     let nextAfterCursor = "",
@@ -81,7 +84,10 @@ export class ProfileService {
     };
   }
 
-  async findOne({ attribute = "id", query }: FindOneInput): Promise<Profile> {
+  async findOne({
+    attribute = "id",
+    query,
+  }: QuerySingleProfileInput): Promise<Profile> {
     const profile = await this.profileRepository
       .createQueryBuilder("profile")
       .where(`profile.${attribute} = :query`, { query })
@@ -127,16 +133,7 @@ export class ProfileService {
   }
 
   async update(data: ProfileInput, profileId: string): Promise<Profile> {
-    const profile = await this.profileRepository
-      .createQueryBuilder("profile")
-      .where("profile.id = :id", { id: profileId })
-      .getOne();
-
-    if (!profile)
-      throw new Errors(
-        "NotFoundException",
-        `Profile with the id of ${profileId} was not found`
-      );
+    const profile = await this.findOne({ attribute: "id", query: profileId });
 
     profile.firstName = data.firstName;
     profile.lastName = data.lastName;
@@ -150,17 +147,9 @@ export class ProfileService {
   }
 
   async delete(profileId: string): Promise<Profile> {
-    const profile = await this.profileRepository
-      .createQueryBuilder("profile")
-      .where("profile.id = :id", { id: profileId })
-      .getOne();
+    const profile = await this.findOne({ attribute: "id", query: profileId });
 
-    if (!profile)
-      throw new Errors(
-        "NotFoundException",
-        `Profile with the id of ${profileId} was not found`
-      );
-    const p = Object.assign({}, profile);
+    const deletedProfile = Object.assign({}, profile);
 
     try {
       await this.profileRepository.remove(profile);
@@ -168,6 +157,6 @@ export class ProfileService {
       throw new Errors("InternalServerErrorException");
     }
 
-    return p;
+    return deletedProfile;
   }
 }

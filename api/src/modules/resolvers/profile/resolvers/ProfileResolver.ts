@@ -1,26 +1,14 @@
 import { Profile } from "@db/entity";
 import { ProfileService } from "@modules/services";
-import { FindOneInput, QueryOptionsInput } from "@modules/shared/input";
-import { PaginationCursor } from "@modules/shared/objectTypes";
+import { PaginatedListMixin } from "@modules/shared/objectTypes";
 import { PaginationResult } from "@tools/types";
-import {
-  Arg,
-  Field,
-  Mutation,
-  ObjectType,
-  Query,
-  Resolver,
-} from "type-graphql";
+import { Arg, Mutation, ObjectType, Query, Resolver } from "type-graphql";
 import { ProfileInput } from "../input/ProfileInput";
+import { QueryProfilesInput } from "../input/QueryProfilesInput";
+import { QuerySingleProfileInput } from "../input/QuerySingleProfileInput";
 
 @ObjectType()
-export class ProfilePaginated {
-  @Field(() => [Profile])
-  data: Profile[];
-
-  @Field()
-  cursor: PaginationCursor;
-}
+export class ProfilePaginated extends PaginatedListMixin(Profile) {}
 
 @Resolver(() => Profile)
 export class ProfileResolver {
@@ -28,13 +16,15 @@ export class ProfileResolver {
 
   @Query(() => ProfilePaginated)
   async profiles(
-    @Arg("options") options: QueryOptionsInput
+    @Arg("options") options: QueryProfilesInput
   ): Promise<PaginationResult<Profile>> {
     return await this.profileService.findAll(options);
   }
 
   @Query(() => Profile)
-  async profile(@Arg("options") options: FindOneInput): Promise<Profile> {
+  async profile(
+    @Arg("options") options: QuerySingleProfileInput
+  ): Promise<Profile> {
     return await this.profileService.findOne(options);
   }
 

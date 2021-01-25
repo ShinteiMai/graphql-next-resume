@@ -1,2 +1,2 @@
-export { QueryOptionsInput } from "./src/QueryOptionsInput";
-export { FindOneInput } from "./src/FindOneInput";
+export { QueryOptionsMixin } from "./src/QueryOptionsInput";
+export { FindOneMixin } from "./src/FindOneInput";

@@ -1,10 +1,13 @@
-import { Field, InputType } from "type-graphql";
+import { ClassType, Field, InputType } from "type-graphql";
 
-@InputType()
-export class FindOneInput {
-  @Field({ defaultValue: "id" })
-  attribute: string;
+export const FindOneMixin = <T extends ClassType>(BaseClass: T) => {
+  @InputType({ isAbstract: true })
+  class FindOneInput extends BaseClass {
+    @Field({ defaultValue: "id" })
+    attribute: string;
 
-  @Field({ nullable: true })
-  query: string;
-}
+    @Field({ nullable: true })
+    query: string;
+  }
+  return FindOneInput;
+};
