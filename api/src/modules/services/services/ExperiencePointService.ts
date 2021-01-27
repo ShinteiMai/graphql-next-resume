@@ -13,7 +13,7 @@ import { ExperienceService } from './ExperienceService';
 export class ExperiencePointService {
   constructor(
     @InjectRepository(ExperiencePoint)
-    private readonly experiencePointService: Repository<ExperiencePoint>,
+    private readonly pointRepository: Repository<ExperiencePoint>,
     private readonly experienceService: ExperienceService
   ) {}
 
@@ -28,7 +28,7 @@ export class ExperiencePointService {
       nextBeforeCursor = '';
     const helper = new Pagination(ExperiencePoint);
 
-    const pointsQb = this.experiencePointService.createQueryBuilder('point');
+    const pointsQb = this.pointRepository.createQueryBuilder('point');
     const { escape } = pointsQb.connection.driver;
     const cursors: CursorParam = {};
 
@@ -87,7 +87,7 @@ export class ExperiencePointService {
   async findAllByExperienceId(
     experienceId: string
   ): Promise<ExperiencePoint[]> {
-    const points = await this.experiencePointService
+    const points = await this.pointRepository
       .createQueryBuilder('point')
       .leftJoinAndSelect('point.experience', 'experience')
       .where('experience.id = :experienceId', { experienceId })
@@ -97,7 +97,7 @@ export class ExperiencePointService {
   }
 
   async findOne({ attribute, query }: FindOneInput): Promise<ExperiencePoint> {
-    const point = await this.experiencePointService
+    const point = await this.pointRepository
       .createQueryBuilder('point')
       .where(`point.${attribute} = :query`, { query })
       .getOne();
@@ -157,7 +157,7 @@ export class ExperiencePointService {
     const deletedPoint = Object.assign({}, point);
 
     try {
-      await this.experiencePointService.remove(point);
+      await this.pointRepository.remove(point);
     } catch (err) {
       throw new Errors('InternalServerErrorException');
     }
