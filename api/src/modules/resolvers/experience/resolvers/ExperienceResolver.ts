@@ -1,12 +1,24 @@
 import { Experience } from '@db/entity';
 import { ExperienceService } from '@modules/services';
-import { FindOneInput } from '@modules/shared/input';
-import { Arg, Mutation, Query, Resolver } from 'type-graphql';
+import { FindOneInput, QueryOptionsInput } from '@modules/shared/input';
+import { PaginatedListMixin } from '@modules/shared/objectTypes';
+import { PaginationResult } from '@tools/types';
+import { Arg, Mutation, ObjectType, Query, Resolver } from 'type-graphql';
 import { ExperienceInput } from '../input/ExperienceInput';
+
+@ObjectType()
+class ExperiencesPaginated extends PaginatedListMixin(Experience) {}
 
 @Resolver()
 export class ExperienceResolver {
   constructor(private readonly experienceService: ExperienceService) {}
+
+  @Query(() => ExperiencesPaginated)
+  async experiences(
+    @Arg('options') options: QueryOptionsInput
+  ): Promise<PaginationResult<Experience>> {
+    return this.experienceService.findAll(options);
+  }
 
   @Query(() => [Experience])
   async experiencesByProfile(

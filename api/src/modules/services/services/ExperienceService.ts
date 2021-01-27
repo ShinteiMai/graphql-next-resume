@@ -1,9 +1,11 @@
 import { Experience } from '@db/entity';
 import { ExperienceInput } from '@modules/resolvers/experience';
-import { FindOneInput } from '@modules/shared/input';
+import { FindOneInput, QueryOptionsInput } from '@modules/shared/input';
 import { Errors } from '@tools/errors';
+import { CursorParam, PaginationResult } from '@tools/types';
+import { Pagination } from '@utils/helpers';
 import { Service } from 'typedi';
-import { Repository } from 'typeorm';
+import { Brackets, Repository } from 'typeorm';
 import { InjectRepository } from 'typeorm-typedi-extensions';
 import { ProfileService } from './ProfileService';
 
@@ -14,6 +16,100 @@ export class ExperienceService {
     private readonly experienceRepository: Repository<Experience>,
     private readonly profileService: ProfileService
   ) {}
+
+  async findAll({
+    limit = 5,
+    order = 'ASC',
+    beforeCursor,
+    afterCursor,
+    paginationKeys = ['id'] as any,
+  }: QueryOptionsInput): Promise<PaginationResult<Experience>> {
+    let nextBeforeCursor = '',
+      nextAfterCursor = '';
+    const helper = new Pagination(Experience);
+
+    const experienceQb = this.experienceRepository.createQueryBuilder(
+      'experience'
+    );
+    const { escape } = experienceQb.connection.driver;
+    const cursors: CursorParam = {};
+
+    if (afterCursor) {
+      Object.assign(cursors, helper.decode(String(afterCursor)));
+    }
+    if (beforeCursor) {
+      Object.assign(cursors, helper.decode(String(beforeCursor)));
+    }
+
+    if (Object.keys(cursors).length > 0) {
+      experienceQb.andWhere(
+        new Brackets((where) => {
+          let query = '';
+          const params: CursorParam = {};
+          let operator: string;
+
+          if (afterCursor) {
+            operator = order === 'ASC' ? '>' : '<';
+          } else if (beforeCursor) {
+            operator = order === 'ASC' ? '<' : '>';
+          } else {
+            operator = '=';
+          }
+
+          paginationKeys.forEach((key) => {
+            params[key] = cursors[key];
+
+            where.orWhere(
+              `${query}experience.${escape(key)} ${operator} :${key}`,
+              params
+            );
+            query = `${query}experience.${escape(key)} = :${key} AND `;
+          });
+        })
+      );
+    }
+
+    experienceQb.take(limit + 1);
+    experienceQb.orderBy('experience.id', order);
+    let data: Experience[];
+    try {
+      data = await experienceQb.getMany();
+    } catch (err) {
+      throw new Errors('InternalServerErrorException');
+    }
+
+    const hasMore = data.length > limit;
+
+    if (hasMore) {
+      data.splice(data.length - 1, 1);
+    }
+
+    if (data.length === 0) {
+      return {
+        data,
+        cursor: {},
+      };
+    }
+
+    if (!afterCursor && beforeCursor) {
+      data.reverse();
+    }
+
+    if (beforeCursor || hasMore) {
+      nextAfterCursor = helper.encode(data[data.length - 1], paginationKeys);
+    }
+    if (afterCursor || (hasMore && beforeCursor)) {
+      nextBeforeCursor = helper.encode(data[0], paginationKeys);
+    }
+
+    return {
+      data,
+      cursor: {
+        afterCursor: nextAfterCursor,
+        beforeCursor: nextBeforeCursor,
+      },
+    };
+  }
 
   async findAllByProfileId(profileId: string): Promise<Experience[]> {
     const experiences = await this.experienceRepository

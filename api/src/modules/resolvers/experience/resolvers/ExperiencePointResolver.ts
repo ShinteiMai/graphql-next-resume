@@ -1,6 +1,6 @@
 import { ExperiencePoint } from '@db/entity';
 import { ExperiencePointService } from '@modules/services';
-import { QueryOptionsInput } from '@modules/shared/input';
+import { FindOneInput, QueryOptionsInput } from '@modules/shared/input';
 import { PaginatedListMixin } from '@modules/shared/objectTypes';
 import { PaginationResult } from '@tools/types';
 import { Arg, Mutation, ObjectType, Query, Resolver } from 'type-graphql';
@@ -32,11 +32,8 @@ export class ExperiencePointResolver {
   }
 
   @Query(() => ExperiencePoint)
-  async experiencePoint(@Arg('id') id: string) {
-    return await this.experiencePointService.findOne({
-      attribute: 'id',
-      query: id,
-    });
+  async experiencePoint(@Arg('options') options: FindOneInput) {
+    return await this.experiencePointService.findOne(options);
   }
 
   @Mutation(() => ExperiencePoint)
