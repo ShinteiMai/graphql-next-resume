@@ -1,8 +1,7 @@
-import { Field, InputType } from "type-graphql";
-
-@InputType()
+import { Field, InputType } from 'type-graphql';
+@InputType({ isAbstract: true })
 export class FindOneInput {
-  @Field({ defaultValue: "id" })
+  @Field({ defaultValue: 'id' })
   attribute: string;
 
   @Field({ nullable: true })

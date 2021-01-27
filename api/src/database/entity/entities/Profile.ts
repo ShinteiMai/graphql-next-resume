@@ -1,5 +1,14 @@
 import { Field, ID, ObjectType } from "type-graphql";
-import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { TypeormLoader } from "type-graphql-dataloader";
+import {
+  BaseEntity,
+  Column,
+  Entity,
+  OneToMany,
+  PrimaryGeneratedColumn,
+  RelationId,
+} from "typeorm";
+import { Experience } from "./Experience";
 
 @ObjectType()
 @Entity()
@@ -31,6 +40,14 @@ export class Profile extends BaseEntity {
   @Field({ nullable: true })
   @Column("text")
   resumeUrl: string;
+
+  @Field(() => [Experience])
+  @OneToMany(() => Experience, (experience) => experience.profile)
+  @TypeormLoader(() => Experience, (profile: Profile) => profile.experienceIds)
+  experiences: Experience[];
+
+  @RelationId((profile: Profile) => profile.experiences)
+  experienceIds: number[];
 
   @Field()
   @Column({ type: "timestamp", default: () => "CURRENT_TIMESTAMP" })

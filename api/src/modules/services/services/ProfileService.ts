@@ -1,12 +1,12 @@
-import { Profile } from "@db/entity";
-import { ProfileInput } from "@modules/resolvers/profile";
-import { FindOneInput } from "@modules/shared/input";
-import { Errors } from "@tools/errors";
-import { CursorParam, PaginationResult, QueryOptions } from "@tools/types";
-import { Pagination } from "@utils/helpers";
-import { Service } from "typedi";
-import { Brackets, Repository } from "typeorm";
-import { InjectRepository } from "typeorm-typedi-extensions";
+import { Profile } from '@db/entity';
+import { ProfileInput } from '@modules/resolvers/profile';
+import { FindOneInput, QueryOptionsInput } from '@modules/shared/input';
+import { Errors } from '@tools/errors';
+import { CursorParam, PaginationResult } from '@tools/types';
+import { Pagination } from '@utils/helpers';
+import { Service } from 'typedi';
+import { Brackets, Repository } from 'typeorm';
+import { InjectRepository } from 'typeorm-typedi-extensions';
 
 @Service()
 export class ProfileService {
@@ -17,16 +17,16 @@ export class ProfileService {
 
   async findAll({
     limit = 5,
-    order = "ASC",
+    order = 'ASC',
     afterCursor,
     beforeCursor,
-  }: QueryOptions): Promise<PaginationResult<Profile>> {
+    paginationKeys = ['id'] as any,
+  }: QueryOptionsInput): Promise<PaginationResult<Profile>> {
     const helper = new Pagination(Profile);
-    const paginationKeys = ["id" as any];
-    let nextAfterCursor = "",
-      nextBeforeCursor = "";
+    let nextAfterCursor = '',
+      nextBeforeCursor = '';
     const cursors: CursorParam = {};
-    const profilesQb = this.profileRepository.createQueryBuilder("profile");
+    const profilesQb = this.profileRepository.createQueryBuilder('profile');
     const { escape } = profilesQb.connection.driver;
 
     if (!!afterCursor)
@@ -38,12 +38,12 @@ export class ProfileService {
       profilesQb.andWhere(
         new Brackets((where) => {
           const params: CursorParam = {};
-          let query = "";
+          let query = '';
           let operator: string;
 
-          if (!!afterCursor) operator = order === "ASC" ? ">" : "<";
-          else if (!!beforeCursor) operator = order === "ASC" ? "<" : ">";
-          else operator = "=";
+          if (!!afterCursor) operator = order === 'ASC' ? '>' : '<';
+          else if (!!beforeCursor) operator = order === 'ASC' ? '<' : '>';
+          else operator = '=';
 
           paginationKeys.forEach((key) => {
             params[key] = cursors[key];
@@ -58,7 +58,7 @@ export class ProfileService {
     }
 
     profilesQb.take(limit + 1);
-    profilesQb.orderBy("profile.id", order);
+    profilesQb.orderBy('profile.id', order);
 
     const data = await profilesQb.getMany();
     const hasMore = data.length > limit;
@@ -81,14 +81,14 @@ export class ProfileService {
     };
   }
 
-  async findOne({ attribute = "id", query }: FindOneInput): Promise<Profile> {
+  async findOne({ attribute = 'id', query }: FindOneInput): Promise<Profile> {
     const profile = await this.profileRepository
-      .createQueryBuilder("profile")
+      .createQueryBuilder('profile')
       .where(`profile.${attribute} = :query`, { query })
       .getOne();
     if (!profile)
       throw new Errors(
-        "NotFoundException",
+        'NotFoundException',
         `Profile with the ${attribute} of ${query} was not found`
       );
     return profile;
@@ -96,11 +96,11 @@ export class ProfileService {
 
   async findActiveProfile(): Promise<Profile> {
     const activeProfile = await this.profileRepository
-      .createQueryBuilder("profile")
-      .where("profie.isActive = :isActive", { isActive: true })
+      .createQueryBuilder('profile')
+      .where('profie.isActive = :isActive', { isActive: true })
       .getOne();
     if (!activeProfile)
-      throw new Errors("NotFoundException", "No active profiles were found");
+      throw new Errors('NotFoundException', 'No active profiles were found');
     return activeProfile;
   }
 
@@ -127,16 +127,7 @@ export class ProfileService {
   }
 
   async update(data: ProfileInput, profileId: string): Promise<Profile> {
-    const profile = await this.profileRepository
-      .createQueryBuilder("profile")
-      .where("profile.id = :id", { id: profileId })
-      .getOne();
-
-    if (!profile)
-      throw new Errors(
-        "NotFoundException",
-        `Profile with the id of ${profileId} was not found`
-      );
+    const profile = await this.findOne({ attribute: 'id', query: profileId });
 
     profile.firstName = data.firstName;
     profile.lastName = data.lastName;
@@ -150,24 +141,16 @@ export class ProfileService {
   }
 
   async delete(profileId: string): Promise<Profile> {
-    const profile = await this.profileRepository
-      .createQueryBuilder("profile")
-      .where("profile.id = :id", { id: profileId })
-      .getOne();
+    const profile = await this.findOne({ attribute: 'id', query: profileId });
 
-    if (!profile)
-      throw new Errors(
-        "NotFoundException",
-        `Profile with the id of ${profileId} was not found`
-      );
-    const p = Object.assign({}, profile);
+    const deletedProfile = Object.assign({}, profile);
 
     try {
       await this.profileRepository.remove(profile);
     } catch (err) {
-      throw new Errors("InternalServerErrorException");
+      throw new Errors('InternalServerErrorException');
     }
 
-    return p;
+    return deletedProfile;
   }
 }
