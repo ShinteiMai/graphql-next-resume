@@ -1,5 +1,7 @@
-export { ExperienceInput } from "./input/ExperienceInput";
-export { QuerySingleExperienceInput } from "./input/QueryOneExperienceInput";
-export { QueryExperiencesInput } from "./input/QueryExperiencesInput";
+/** Inputs */
+export { ExperienceInput } from './input/ExperienceInput';
+export { ExperiencePointInput } from './input/ExperiencePointInput';
 
-export { ExperienceResolver } from "./resolvers/ExperienceResolver";
+/** Resolvers */
+export { ExperienceResolver } from './resolvers/ExperienceResolver';
+export { ExperiencePointResolver } from './resolvers/ExperiencePointResolver';

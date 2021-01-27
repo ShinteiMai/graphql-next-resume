@@ -1,14 +1,16 @@
-import Container from "typedi";
+import Container from 'typedi';
 import {
   BaseEntity,
   ConnectionOptions,
   createConnection,
+  Logger,
   useContainer,
-} from "typeorm";
+} from 'typeorm';
 
 interface TypeORMEnvironmentOptions {
   database: string;
   logging: boolean;
+  logger?: 'advanced-console' | 'simple-console' | 'file' | 'debug' | Logger;
 }
 
 const createTypeORMConnection = (): ConnectionOptions & {
@@ -16,19 +18,19 @@ const createTypeORMConnection = (): ConnectionOptions & {
   factories: string[];
 } => {
   let environmentOptions: TypeORMEnvironmentOptions = {
-    database: "stevenhansel",
+    database: 'stevenhansel',
     logging: true,
   };
   switch (process.env.NODE_ENV) {
-    case "test":
+    case 'test':
       environmentOptions = {
-        database: "stevenhansel-test",
+        database: 'stevenhansel-test',
         logging: false,
       };
       break;
-    case "production":
+    case 'production':
       environmentOptions = {
-        database: "stevenhansel-prod",
+        database: 'stevenhansel-prod',
         logging: false,
       };
       break;
@@ -36,16 +38,16 @@ const createTypeORMConnection = (): ConnectionOptions & {
       break;
   }
   return {
-    name: "default",
-    type: "postgres",
-    host: process.env.NODE_ENV === "production" ? "database" : "localhost",
+    name: 'default',
+    type: 'postgres',
+    host: process.env.NODE_ENV === 'production' ? 'database' : 'localhost',
     port: 5432,
-    username: "postgres",
-    password: "password",
+    username: 'postgres',
+    password: 'password',
     synchronize: true,
-    entities: ["src/database/entity/**/*.*"],
-    seeds: ["src/database/seeds/**/*{.ts,.js}"],
-    factories: ["src/database/factories/**/*{.ts,.js}"],
+    entities: ['src/database/entity/**/*.*'],
+    seeds: ['src/database/seeds/**/*{.ts,.js}'],
+    factories: ['src/database/factories/**/*{.ts,.js}'],
     ...environmentOptions,
   };
 };

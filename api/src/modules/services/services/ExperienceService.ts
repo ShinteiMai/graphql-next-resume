@@ -1,13 +1,11 @@
-import { Experience } from "@db/entity";
-import {
-  ExperienceInput,
-  QuerySingleExperienceInput,
-} from "@modules/resolvers/experience";
-import { Errors } from "@tools/errors";
-import { Service } from "typedi";
-import { Repository } from "typeorm";
-import { InjectRepository } from "typeorm-typedi-extensions";
-import { ProfileService } from "./ProfileService";
+import { Experience } from '@db/entity';
+import { ExperienceInput } from '@modules/resolvers/experience';
+import { FindOneInput } from '@modules/shared/input';
+import { Errors } from '@tools/errors';
+import { Service } from 'typedi';
+import { Repository } from 'typeorm';
+import { InjectRepository } from 'typeorm-typedi-extensions';
+import { ProfileService } from './ProfileService';
 
 @Service()
 export class ExperienceService {
@@ -17,22 +15,25 @@ export class ExperienceService {
     private readonly profileService: ProfileService
   ) {}
 
-  // async findAllByProfileId(): Promise<Experience[]> {
+  async findAllByProfileId(profileId: string): Promise<Experience[]> {
+    const experiences = await this.experienceRepository
+      .createQueryBuilder('experience')
+      .leftJoinAndSelect('experience.profile', 'profile')
+      .where('profile.id = :profileId', { profileId })
+      .getMany();
 
-  // }
+    return experiences;
+  }
 
-  async findOne({
-    attribute,
-    query,
-  }: QuerySingleExperienceInput): Promise<Experience> {
+  async findOne({ attribute, query }: FindOneInput): Promise<Experience> {
     const experience = await this.experienceRepository
-      .createQueryBuilder("experience")
+      .createQueryBuilder('experience')
       .andWhere(`experience.${attribute} = :query`, { query })
       .getOne();
 
     if (!experience)
       throw new Errors(
-        "NotFoundException",
+        'NotFoundException',
         `Experience with the ${attribute} of ${query} was not found`
       );
 
@@ -48,7 +49,7 @@ export class ExperienceService {
     profileId,
   }: ExperienceInput): Promise<Experience> {
     const profile = await this.profileService.findOne({
-      attribute: "id",
+      attribute: 'id',
       query: profileId,
     });
 
@@ -65,7 +66,7 @@ export class ExperienceService {
     try {
       await experience.save();
     } catch (err) {
-      throw new Errors("InternalServerErrorException");
+      throw new Errors('InternalServerErrorException');
     }
 
     return experience;
@@ -83,12 +84,12 @@ export class ExperienceService {
     }: ExperienceInput
   ): Promise<Experience> {
     const experience = await this.findOne({
-      attribute: "id",
+      attribute: 'id',
       query: experienceId,
     });
 
     const profile = await this.profileService.findOne({
-      attribute: "id",
+      attribute: 'id',
       query: profileId,
     });
 
@@ -103,7 +104,7 @@ export class ExperienceService {
     try {
       await experience.save();
     } catch (err) {
-      throw new Errors("InternalServerErrorException");
+      throw new Errors('InternalServerErrorException');
     }
 
     return experience;
@@ -111,7 +112,7 @@ export class ExperienceService {
 
   async delete(experienceId: string): Promise<Experience> {
     const experience = await this.findOne({
-      attribute: "id",
+      attribute: 'id',
       query: experienceId,
     });
 
@@ -120,7 +121,7 @@ export class ExperienceService {
     try {
       await this.experienceRepository.remove(experience);
     } catch (err) {
-      throw new Errors("InternalServerErrorException");
+      throw new Errors('InternalServerErrorException');
     }
 
     return deletedExperience;

@@ -1,29 +1,30 @@
-import { IsNumber, IsOptional, IsString } from "class-validator";
-import { ClassType, Field, InputType } from "type-graphql";
+import { IsNumber, IsOptional, IsString } from 'class-validator';
+import { Field, InputType } from 'type-graphql';
 
-export const QueryOptionsMixin = <T extends ClassType>(BaseClass: T) => {
-  @InputType({ isAbstract: true })
-  class QueryOptionsInput extends BaseClass {
-    @Field({ nullable: true })
-    @IsOptional()
-    @IsNumber()
-    limit: number;
+@InputType({ isAbstract: true })
+export class QueryOptionsInput {
+  @Field({ nullable: true })
+  @IsOptional()
+  @IsNumber()
+  limit: number;
 
-    @Field({ nullable: true })
-    @IsOptional()
-    @IsString()
-    order: "ASC" | "DESC";
+  @Field({ nullable: true })
+  @IsOptional()
+  @IsString()
+  order: 'ASC' | 'DESC';
 
-    @Field({ nullable: true })
-    @IsOptional()
-    @IsString()
-    afterCursor: string;
+  @Field({ nullable: true })
+  @IsOptional()
+  @IsString()
+  afterCursor: string;
 
-    @Field({ nullable: true })
-    @IsOptional()
-    @IsString()
-    beforeCursor: string;
-  }
+  @Field({ nullable: true })
+  @IsOptional()
+  @IsString()
+  beforeCursor: string;
 
-  return QueryOptionsInput;
-};
+  @Field(() => [String], { nullable: true })
+  @IsOptional()
+  @IsString({ each: true })
+  paginationKeys: string[];
+}

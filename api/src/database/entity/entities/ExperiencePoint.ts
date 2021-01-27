@@ -1,11 +1,18 @@
 import { Field, ID, ObjectType } from "type-graphql";
 import { TypeormLoader } from "type-graphql-dataloader";
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn, RelationId } from "typeorm";
+import {
+  BaseEntity,
+  Column,
+  Entity,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+  RelationId,
+} from "typeorm";
 import { Experience } from "./Experience";
 
 @ObjectType()
 @Entity()
-export class ExperiencePoint {
+export class ExperiencePoint extends BaseEntity {
   @Field(() => ID)
   @PrimaryGeneratedColumn()
   id: string;
@@ -16,7 +23,10 @@ export class ExperiencePoint {
 
   @Field(() => Experience)
   @ManyToOne(() => Experience, (experience) => experience.points)
-  @TypeormLoader(() => Experience, (point: ExperiencePoint) => point.experienceId)
+  @TypeormLoader(
+    () => Experience,
+    (point: ExperiencePoint) => point.experienceId
+  )
   experience: Experience;
 
   @RelationId((point: ExperiencePoint) => point.experience)
