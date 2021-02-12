@@ -1,9 +1,13 @@
-import Project from "../components/Common/Project/Project";
-import { profile as data } from "@data/json";
+import { profile as data } from '@data/json';
+import { Layout } from '@components/UI';
+import { Project } from '@components/Common';
 
 const ProjectsPage = () => {
   return (
-    <div className="pb-6">
+    <Layout className="pb-6">
+      <h2 className="text-5xl font-medium hidden lg:block text-accents-2">
+        Projects
+      </h2>
       <div className="mt-2 lg:mt-6">
         {data.projects.map((p, index) => (
           <Project
@@ -17,7 +21,7 @@ const ProjectsPage = () => {
           />
         ))}
       </div>
-    </div>
+    </Layout>
   );
 };
 

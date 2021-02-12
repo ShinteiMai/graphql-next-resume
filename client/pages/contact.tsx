@@ -1,8 +1,12 @@
-import Button from "../components/UI/Button";
+import { Layout } from '@components/UI';
+import Button from '../components/UI/Button';
 
 const ContactPage = () => {
   return (
-    <div>
+    <Layout>
+      <h2 className="text-5xl font-medium hidden lg:block text-accents-2">
+        Contact
+      </h2>
       <h2 className="mt-0 md:mt-6 mb-2 text-2xl font-medium text-accents-2">
         Get in Touch
       </h2>
@@ -14,7 +18,7 @@ const ContactPage = () => {
       <Button className="mt-8" link="mailto:shinteimai@protonmail.com">
         Mail me!
       </Button>
-    </div>
+    </Layout>
   );
 };
 
