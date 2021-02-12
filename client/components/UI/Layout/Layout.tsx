@@ -1,7 +1,8 @@
-import React from "react";
-import Head from "next/head";
-import { TComponent } from "@components/types";
-import { Sidebar } from "@components/Common";
+import React from 'react';
+import Head from 'next/head';
+import { TComponent } from '@components/types';
+import { Sidebar } from '@components/Common';
+import Mount from '../Mount';
 
 interface Props extends TComponent {}
 
@@ -89,7 +90,7 @@ const Layout = ({ children }: Props) => {
           data-testid="mainContainer"
           className="ml-0 lg:ml-84 w-full lg:w-full px-6 md:px-8 lg:px-0 py-4 md:py-0 mx-auto"
         >
-          {children}
+          <Mount>{children}</Mount>
         </div>
       </div>
     </div>

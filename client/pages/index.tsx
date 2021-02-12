@@ -1,10 +1,13 @@
-import { Experience, Technology } from "@components/Common";
-import { TextLink } from "@components/UI";
-import { profile, technologies } from "@data/json";
+import { Experience, Technology } from '@components/Common';
+import { Layout, TextLink } from '@components/UI';
+import { profile, technologies } from '@data/json';
 
 const IndexPage = () => {
   return (
-    <div>
+    <Layout>
+      <h2 className="text-5xl font-medium hidden lg:block text-accents-2">
+        About
+      </h2>
       <div className="mt-0 md:mt-4 lg:mt-6">
         <h2 className="text-xl font-medium text-accents-2">Biography</h2>
         <p className="mt-3 text-accents-1 text-sm">
@@ -18,12 +21,12 @@ const IndexPage = () => {
           practices.
         </p>
         <p className="mt-3 text-accents-1 text-sm">
-          I’m currently studying Computer Engineering in{" "}
+          I’m currently studying Computer Engineering in{' '}
           <TextLink href={profile.links.binus} newTab className="text-primary">
             BINUS University
-          </TextLink>{" "}
+          </TextLink>{' '}
           as a sophomore. I started my development journey by getting into an
-          internship in an Indonesian startup,{" "}
+          internship in an Indonesian startup,{' '}
           <TextLink
             href={profile.links.kotakode}
             newTab
@@ -57,7 +60,7 @@ const IndexPage = () => {
           </div>
         </div>
       </div>
-    </div>
+    </Layout>
   );
 };
 

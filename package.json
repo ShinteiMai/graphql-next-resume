@@ -1,18 +1,25 @@
 {
-    "private": true,
-    "workspaces": [
-      "api",
-      "client"
-    ],
-    "scripts": {
-      "dev-client": "cd client && yarn dev",
-      "build-client": "cd client && yarn build",
-      "start-client": "cd client && yarn start",
-      "test-client": "cd client && yarn test",
-      "integration-client": "cd client && yarn integration",
-      "dev-api": "cd api && yarn dev",
-      "test-api": "cd api && yarn test",
-      "build-api": "cd api && yarn build",
-      "start-api": "cd api && yarn start"
-    }
+  "private": true,
+  "scripts": {
+    "client:dev": "cd client && yarn dev",
+    "client:build": "cd client && yarn build",
+    "client:start": "cd client && yarn start",
+    "client:test": "cd client && yarn test",
+    "client:integration": "cd client && yarn integration",
+    "api:dev": "cd api && yarn dev",
+    "api:test": "cd api && yarn test",
+    "api:build": "cd api && yarn build",
+    "api:start": "cd api && yarn start",
+    "generate": "graphql-codegen --config codegen.yml --watch"
+  },
+  "devDependencies": {
+    "@graphql-codegen/cli": "1.20.1",
+    "@graphql-codegen/introspection": "1.18.1",
+    "@graphql-codegen/typescript": "1.20.2",
+    "@graphql-codegen/typescript-operations": "1.17.14",
+    "@graphql-codegen/typescript-react-apollo": "2.2.1",
+    "@graphql-codegen/typescript-urql": "^2.0.3",
+    "concurrently": "^5.3.0",
+    "graphql-tag": "^2.11.0"
   }
+}

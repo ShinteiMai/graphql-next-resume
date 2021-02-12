@@ -5,6 +5,7 @@ import { define } from "typeorm-seeding";
 define(Profile, (faker: typeof Faker) => {
   const profile = new Profile();
 
+  profile.isActive = false;
   profile.firstName = faker.name.firstName();
   profile.lastName = faker.name.lastName();
   profile.biography = faker.lorem.paragraphs(3);
