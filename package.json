@@ -1,9 +1,5 @@
 {
   "private": true,
-  "workspaces": [
-    "api",
-    "client"
-  ],
   "scripts": {
     "client:dev": "cd client && yarn dev",
     "client:build": "cd client && yarn build",
@@ -23,7 +19,7 @@
     "@graphql-codegen/typescript-operations": "1.17.14",
     "@graphql-codegen/typescript-react-apollo": "2.2.1",
     "@graphql-codegen/typescript-urql": "^2.0.3",
-    "graphql-tag": "^2.11.0",
-    "concurrently": "^5.3.0"
+    "concurrently": "^5.3.0",
+    "graphql-tag": "^2.11.0"
   }
 }

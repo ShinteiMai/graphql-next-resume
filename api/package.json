@@ -61,9 +61,9 @@
     "deploy": "docker-compose --env-file .env.production up --build -d",
     "test:db": "NODE_ENV=test ts-node ./src/utils/test/setup/dbSetup.ts",
     "test": "NODE_ENV=test npm run seed:run && npm run test:db && jest --forceExit --detectOpenHandles",
-    "seed:config": "ts-node ../node_modules/typeorm-seeding/dist/cli.js config",
-    "seed:run": "ts-node ../node_modules/typeorm-seeding/dist/cli.js seed",
-    "seed:drop": "NODE_ENV=test ts-node ../node_modules/typeorm/cli.js schema:drop",
-    "seed:sync": "ts-node ../node_modules/typeorm/cli.js schema:sync"
+    "seed:config": "ts-node node_modules/typeorm-seeding/dist/cli.js config",
+    "seed:run": "ts-node node_modules/typeorm-seeding/dist/cli.js seed",
+    "seed:drop": "NODE_ENV=test ts-node node_modules/typeorm/cli.js schema:drop",
+    "seed:sync": "ts-node node_modules/typeorm/cli.js schema:sync"
   }
 }
